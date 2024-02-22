@@ -389,7 +389,10 @@ const filteredCustomer = computed(() => {
         );
     } else if (filterChoice.value == 'status' && search.value.toLowerCase() === 'paid') {
         return products.value.filter(product => product.status === 'Paid');
-    } else {
+    } else if (filterChoice.value == 'status' && search.value.toLowerCase() === 'unpaid') {
+        return products.value.filter(product => product.status === 'Unpaid');
+    }
+    else {
         return products.value;
     }
 });
