@@ -21,7 +21,7 @@
                     :disabled="filterChoice === 'status'" />
                 <DropdownMenu v-if="filterChoice == 'status'">
                     <DropdownMenuTrigger as-child>
-                        <Button variant="outline">
+                        <Button variant="success">
                             Status
                         </Button>
                     </DropdownMenuTrigger>
