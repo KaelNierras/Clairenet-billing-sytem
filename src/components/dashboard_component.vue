@@ -114,7 +114,7 @@
                         </div>
                     </div>
                     <DialogFooter>
-                        <Button type="submit">
+                        <Button type="submit" @click="addPayable()">
                             Add
                         </Button>
                     </DialogFooter>
@@ -294,6 +294,10 @@ const handleClick = (choice: string) => {
 
 const updateStatus = (name: string,status: string) => {
     console.log(name , 'is ' , status);
+};
+
+const addPayable = () => {
+    console.log(name.value, address.value, date.value, bill.value);
 };
 
 const textConverter = (text: string) => {
