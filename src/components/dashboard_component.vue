@@ -1,12 +1,20 @@
 <template>
-    <h2 class="text-2xl font-semibold text-gray-800 dark:text-white mb-5">Due in 3 days!</h2>
-    <div class="flex flex-row gap-5">       
-        <a v-for="(item, index) in upComingDueList" :key="index"
-            href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ item.name }}</h5>
-            <p class="font-normal text-gray-700 dark:text-gray-400">{{ item.date }}</p>
-        </a>
-        </div>
+    <Alert class="mb-5 w-64">
+        <Terminal class="h-4 w-4" />
+        <AlertTitle>Heads up!</AlertTitle>
+        <AlertDescription>
+            You can add components to your app using the cli.
+        </AlertDescription>
+    </Alert>
+    <div class="flex flex-row gap-5">
+        <Alert v-for="(item, index) in upComingDueList" :key="index" class="mb-5 w-64">
+            <Terminal class="h-4 w-4" />
+            <AlertTitle>{{ item.name }}</AlertTitle>
+            <AlertDescription>
+                {{ item.date }}
+            </AlertDescription>
+        </Alert>
+    </div>
     <div class="card rounded bg-gray-50 dark:bg-gray-700 mt-5">
         <div class="p-4 flex flex-row justify-between items-center">
             <div class="flex gap-2 items-center p-2 rounded w-1/2 sm:1/3"
@@ -135,29 +143,40 @@
                         </td>
                         <td class="px-6 py-4 text-left">
                             <div class="flex gap-4">
-
-                                <AlertDialog>
-                                    <AlertDialogTrigger as-child>
-                                        <Button variant="success">
-                                            <span class="material-symbols-outlined">
-                                                edit
-                                            </span>
+                                <Dialog>
+                                    <DialogTrigger as-child>
+                                        <Button variant="outline">
+                                            Edit Profile
                                         </Button>
-                                    </AlertDialogTrigger>
-                                    <AlertDialogContent>
-                                        <AlertDialogHeader>
-                                            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                                            <AlertDialogDescription>
-                                                This action cannot be undone. This will permanently delete your
-                                                account and remove your data from our servers.
-                                            </AlertDialogDescription>
-                                        </AlertDialogHeader>
-                                        <AlertDialogFooter>
-                                            <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                            <AlertDialogAction>Continue</AlertDialogAction>
-                                        </AlertDialogFooter>
-                                    </AlertDialogContent>
-                                </AlertDialog>
+                                    </DialogTrigger>
+                                    <DialogContent class="sm:max-w-[425px]">
+                                        <DialogHeader>
+                                            <DialogTitle>Edit profile</DialogTitle>
+                                            <DialogDescription>
+                                                Make changes to your profile here. Click save when you're done.
+                                            </DialogDescription>
+                                        </DialogHeader>
+                                        <div class="grid gap-4 py-4">
+                                            <div class="grid grid-cols-4 items-center gap-4">
+                                                <Label for="name" class="text-right">
+                                                    Name
+                                                </Label>
+                                                <Input id="name" value="Pedro Duarte" class="col-span-3" />
+                                            </div>
+                                            <div class="grid grid-cols-4 items-center gap-4">
+                                                <Label for="username" class="text-right">
+                                                    Username
+                                                </Label>
+                                                <Input id="username" value="@peduarte" class="col-span-3" />
+                                            </div>
+                                        </div>
+                                        <DialogFooter>
+                                            <Button type="submit">
+                                                Save changes
+                                            </Button>
+                                        </DialogFooter>
+                                    </DialogContent>
+                                </Dialog>
                             </div>
                         </td>
                     </tr>
@@ -170,16 +189,16 @@
 <script setup lang="ts">
 //Shadcn Imports
 import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-    AlertDialogTrigger,
-} from '@/components/ui/alert-dialog'
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from '@/components/ui/dialog'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 
 import {
     DropdownMenu,
@@ -191,6 +210,8 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 
+import { Terminal } from 'lucide-vue-next'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { ref, reactive, onMounted, computed } from 'vue';
 import { initFlowbite } from 'flowbite'
@@ -213,7 +234,7 @@ const handleClick = (choice: string) => {
 };
 
 const textConverter = (text: string) => {
-    switch(text) {
+    switch (text) {
         case 'customerName':
             return 'Customer Name';
         case 'address':
@@ -241,9 +262,9 @@ const products = ref<Product[]>([
 ]);
 
 const upComingDueList = ref([
-  { name: 'John Doe', date: '2022-12-31' },
-  { name: 'Jane Doe', date: '2022-12-30' },
-  { name: 'Jim Doe', date: '2022-12-29' },
+    { name: 'John Doe', date: '2022-12-31' },
+    { name: 'Jane Doe', date: '2022-12-30' },
+    { name: 'Jim Doe', date: '2022-12-29' },
 ]);
 
 const sortKey = ref<keyof Product | ''>('');
