@@ -1,80 +1,153 @@
 <template>
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                    <th scope="col" class="px-6 py-3">
-                        Product name
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        <div class="flex items-center">
-                            Color
-                            <a href="#"><svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    fill="currentColor" viewBox="0 0 24 24">
-                                    <path
-                                        d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
-                                </svg></a>
-                        </div>
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        <div class="flex items-center">
-                            Category
-                            <a href="#"><svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    fill="currentColor" viewBox="0 0 24 24">
-                                    <path
-                                        d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
-                                </svg></a>
-                        </div>
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        <div class="flex items-center">
-                            Price
-                            <a href="#"><svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    fill="currentColor" viewBox="0 0 24 24">
-                                    <path
-                                        d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
-                                </svg></a>
-                        </div>
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        <span class="sr-only">Edit</span>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-            <tr v-for="(product, index) in products" :key="index" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {{ product.name }}
-                </th>
-                <td class="px-6 py-4">
-                    {{ product.color }}
-                </td>
-                <td class="px-6 py-4">
-                    {{ product.category }}
-                </td>
-                <td class="px-6 py-4">
-                    {{ product.price }}
-                </td>
-                <td class="px-6 py-4 text-right">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                </td>
-            </tr>
-</tbody>
-        </table>
-</div>
+    <div class="car rounded bg-gray-50 dark:bg-gray-700">
+        <div class="p-4 flex flex-row justify-between items-center">
+            <div class="flex gap-2 items-center p-2 rounded w-1/2 sm:1/3" style="background-color: rgba(255, 255, 255, 0.299);">
+                <span class="material-symbols-outlined">
+                    search
+                </span>
+                <input v-model="search" type="text" placeholder="Search customer"
+                    class="w-full px-3 py-2 text-sm leading-tight dark:text-white text-gray-700 bg-transparent rounded appearance-none focus:outline-none focus:shadow-outline" />
+            </div>
+            <Button>Add customers</Button>
+            
+        </div>
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class=" text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            <div class="flex flex-row items-center gap-3">
+                                Customer name
+                                <span class="material-symbols-outlined hover:cursor-pointer text-xl hover:text-blue-500"
+                                    @click="sort('customerName')">
+                                    swap_vert
+                                </span>
+                            </div>
+                        </th>
+                        <th scope="col" class="px-6 py-3 ">
+                            <div class="flex flex-row items-center gap-3">
+                                Address
+                                <span class="material-symbols-outlined hover:cursor-pointer text-xl hover:text-blue-500"
+                                    @click="sort('address')">
+                                    swap_vert
+                                </span>
+                            </div>
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            <div class="flex flex-row items-center gap-3">
+                                Due Date
+                                <span class="material-symbols-outlined hover:cursor-pointer text-xl hover:text-blue-500"
+                                    @click="sort('dueDate')">
+                                    swap_vert
+                                </span>
+                            </div>
+                        </th>
+                        <th scope="col" class="px-6 py-3 ">
+                            <div class="flex flex-row items-center gap-3">
+                                Bill
+                                <span class="material-symbols-outlined hover:cursor-pointer text-xl hover:text-blue-500"
+                                    @click="sort('bill')">
+                                    swap_vert
+                                </span>
+                            </div>
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            <div class="flex flex-row items-center gap-3">
+                                <div class="flex flex-row items-center gap-3">
+                                    Status
+                                    <span class="material-symbols-outlined hover:cursor-pointer text-xl hover:text-blue-500"
+                                        @click="sort('status')">
+                                        swap_vert
+                                    </span>
+                                </div>
+                            </div>
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Action
+                            <span class="sr-only">Edit</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(product, index) in filteredProducts" :key="index"
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{ product.customerName }}
+                        </th>
+                        <td class="px-6 py-4">
+                            {{ product.address }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ product.dueDate }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ product.bill }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ product.status }}
+                        </td>
+                        <td class="px-6 py-4 text-left">
+                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </template>
 
 <script setup lang="ts">
-import { ref,onMounted } from 'vue';
+import { ref, reactive, onMounted, computed } from 'vue';
 import { initFlowbite } from 'flowbite'
+import { Button } from '@/components/ui/button'
 
 onMounted(() => {
     initFlowbite()
 });
 
-const products = ref([
-    { name: 'Apple MacBook Pro 17"', color: 'Silver', category: 'Laptop', price: '$2999' },
-    { name: 'Microsoft Surface Pro', color: 'White', category: 'Laptop PC', price: '$1999' },
-    { name: 'Magic Mouse 2', color: 'Black', category: 'Accessories', price: '$99' },
+type Product = {
+    customerName: string;
+    address: string;
+    dueDate: string;
+    bill: string;
+    status: string;
+};
+
+type SortOrders = {
+    [K in keyof Product]?: number;
+};
+
+const products = ref<Product[]>([
+    { customerName: 'John Doe', address: '123 Main St', dueDate: '2022-12-31', bill: 'Bill001', status: 'Paid' },
+    { customerName: 'Jane Doe', address: '456 Oak St', dueDate: '2023-01-31', bill: 'Bill002', status: 'Unpaid' },
+    { customerName: 'Bob Smith', address: '789 Pine St', dueDate: '2022-11-30', bill: 'Bill003', status: 'Paid' },
 ]);
+
+const sortKey = ref<keyof Product | ''>('');
+const sortOrders = reactive<SortOrders>({
+    customerName: 1,
+    address: 1,
+    dueDate: 1,
+    status: 1
+});
+
+const sort = (key: keyof Product) => {
+    sortKey.value = key;
+    sortOrders[key] = sortOrders[key]! * -1;
+    products.value.sort((a, b) => {
+        const aKey = a[key];
+        const bKey = b[key];
+        return (aKey === bKey ? 0 : aKey > bKey ? 1 : -1) * sortOrders[key]!;
+    });
+};
+
+const search = ref('');
+
+const filteredProducts = computed(() => {
+    if (search.value) {
+        return products.value.filter(product => product.customerName.toLowerCase().includes(search.value.toLowerCase()));
+    } else {
+        return products.value;
+    }
+});
 </script>
