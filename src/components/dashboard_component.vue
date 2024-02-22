@@ -76,13 +76,13 @@
                             <Label for="name" class="text-right">
                                 Name
                             </Label>
-                            <Input id="name" value="Pedro Duarte" class="col-span-3" />
+                            <Input id="name" v-model="name" type="text" class="col-span-3" />
                         </div>
                         <div class="grid grid-cols-4 items-center gap-4">
                             <Label for="username" class="text-right">
                                 Address
                             </Label>
-                            <Input id="username" value="@peduarte" class="col-span-3" />
+                            <Input id="username" v-model="address" type="text"   class="col-span-3" />
                         </div>
                         <div class="grid grid-cols-4 items-center gap-4">
                             <Label for="username" class="text-right">
@@ -110,7 +110,7 @@
                             <Label for="username" class="text-right">
                                 Bill
                             </Label>
-                            <Input id="username" value="@peduarte" class="col-span-3" />
+                            <Input id="username" v-model="bill" type="number"  class="col-span-3" />
                         </div>
                     </div>
                     <DialogFooter>
@@ -200,34 +200,23 @@
                             <div class="flex gap-4">
                                 <Dialog>
                                     <DialogTrigger as-child>
-                                        <Button variant="outline">
-                                            Edit Profile
+                                        <Button variant="success">
+                                            <SquarePen />
                                         </Button>
                                     </DialogTrigger>
                                     <DialogContent class="sm:max-w-[425px]">
                                         <DialogHeader>
-                                            <DialogTitle>Edit profile</DialogTitle>
+                                            <DialogTitle>Update Status</DialogTitle>
                                             <DialogDescription>
-                                                Make changes to your profile here. Click save when you're done.
+                                                Update status whether the customer has already paid.
                                             </DialogDescription>
                                         </DialogHeader>
-                                        <div class="grid gap-4 py-4">
-                                            <div class="grid grid-cols-4 items-center gap-4">
-                                                <Label for="name" class="text-right">
-                                                    Name
-                                                </Label>
-                                                <Input id="name" value="Pedro Duarte" class="col-span-3" />
-                                            </div>
-                                            <div class="grid grid-cols-4 items-center gap-4">
-                                                <Label for="username" class="text-right">
-                                                    Username
-                                                </Label>
-                                                <Input id="username" value="@peduarte" class="col-span-3" />
-                                            </div>
-                                        </div>
                                         <DialogFooter>
-                                            <Button type="submit">
-                                                Save changes
+                                            <Button variant="success" type="submit">
+                                                Make as Paid
+                                            </Button>
+                                            <Button variant="destructive" type="submit">
+                                                Make as Unpaid
                                             </Button>
                                         </DialogFooter>
                                     </DialogContent>
@@ -244,7 +233,7 @@
 <script setup lang="ts">
 //Shadcn Imports
 import { format } from 'date-fns'
-import { Calendar as CalendarIcon } from 'lucide-vue-next'
+import { Calendar as CalendarIcon, SquarePen } from 'lucide-vue-next'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
@@ -255,6 +244,9 @@ import {
 } from '@/components/ui/popover'
 
 const date = ref<Date>()
+const name = ref('')
+const address = ref('')
+const bill = ref('')
 
 import {
     Dialog,
