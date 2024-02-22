@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { auth } from '../firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { useRouter } from 'vue-router';
@@ -25,9 +25,51 @@ const signInWithEmail = async (email: string, password: string) => {
   }
 };
 
+const darkMode = ref(getDarkMode());
+
+function getDarkMode() {
+  // Try to get the dark mode setting from localStorage
+  const storedDarkMode = localStorage.getItem('darkMode');
+
+  // If the setting exists, return it (converted to a boolean)
+  if (storedDarkMode !== null) {
+    return storedDarkMode === 'true';
+  }
+
+  // Otherwise, determine the setting based on the body class
+  const body = document.querySelector('body');
+  const isDark = body?.classList.contains('dark');
+  return isDark;
+}
+
+function toggleDarkMode() {
+  darkMode.value = !darkMode.value;
+
+  // Store the new setting in localStorage
+  localStorage.setItem('darkMode', darkMode.value.toString());
+
+  const body = document.querySelector('body');
+  body?.classList.toggle('dark', darkMode.value);
+}
+
+onMounted(() => {
+  const body = document.querySelector('body');
+  body?.classList.toggle('dark', darkMode.value);
+});
+
 </script>
 
 <template>
+    <div class="flex items-center ms-3">
+    <Button variant="ghost" size="sm" class="mr-0" @click="toggleDarkMode">
+      <span class="material-symbols-outlined" v-if="darkMode">
+        light_mode
+      </span>
+      <span class="material-symbols-outlined" v-else>
+        dark_mode
+      </span>
+    </Button>
+  </div>
     <div
         class="w-80 sm:w-96 p-8 bg-white border border-gray-200 rounded-lg shadow md:p-8 dark:bg-gray-800 dark:border-gray-700">
         <form class="space-y-6"  @submit.prevent="signInWithEmail(email,password)">
