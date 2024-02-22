@@ -17,7 +17,33 @@
                     search
                 </span>
                 <input v-model="search" type="text" :placeholder="'Search ' + textConverter(filterChoice)"
-                    class="w-full px-3 py-2 text-sm leading-tight dark:text-white text-gray-700 bg-transparent rounded appearance-none focus:outline-none focus:shadow-outline" />
+                    class="w-full px-3 py-2 text-sm leading-tight dark:text-white text-gray-700 bg-transparent rounded appearance-none focus:outline-none focus:shadow-outline"
+                    :disabled="filterChoice === 'status'" />
+                <DropdownMenu v-if="filterChoice == 'status'">
+                    <DropdownMenuTrigger as-child>
+                        <Button variant="outline">
+                            Status
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent class="w-56">
+                        <DropdownMenuLabel>Filter Status</DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuGroup>
+                            <DropdownMenuItem @click="updateSearch('Paid')">
+                                <span class="material-symbols-outlined mr-2">
+                                    check_circle
+                                </span>
+                                <span>Paid</span>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem @click="updateSearch('Unpaid')">
+                                <span class="material-symbols-outlined mr-2">
+                                    close
+                                </span>
+                                <span>Unpaid</span>
+                            </DropdownMenuItem>
+                        </DropdownMenuGroup>
+                    </DropdownMenuContent>
+                </DropdownMenu>
                 <DropdownMenu>
                     <DropdownMenuTrigger as-child>
                         <Button variant="outline">
@@ -82,7 +108,7 @@
                             <Label for="username" class="text-right">
                                 Address
                             </Label>
-                            <Input id="username" v-model="address" type="text"   class="col-span-3" />
+                            <Input id="username" v-model="address" type="text" class="col-span-3" />
                         </div>
                         <div class="grid grid-cols-4 items-center gap-4">
                             <Label for="username" class="text-right">
@@ -90,19 +116,16 @@
                             </Label>
                             <Popover>
                                 <PopoverTrigger as-child>
-                                <Button
-                                    :variant="'outline'"
-                                    :class="cn(
-                                    'w-[280px] justify-start text-left font-normal',
-                                    !date && 'text-muted-foreground',
-                                    )"
-                                >
-                                    <CalendarIcon class="mr-2 h-4 w-4" />
-                                    <span>{{ date ? format(date, "PPP") : "Pick a date" }}</span>
-                                </Button>
+                                    <Button :variant="'outline'" :class="cn(
+                                        'w-[280px] justify-start text-left font-normal',
+                                        !date && 'text-muted-foreground',
+                                    )">
+                                        <CalendarIcon class="mr-2 h-4 w-4" />
+                                        <span>{{ date ? format(date, "PPP") : "Pick a date" }}</span>
+                                    </Button>
                                 </PopoverTrigger>
                                 <PopoverContent class="w-auto p-0">
-                                <Calendar v-model="date" />
+                                    <Calendar v-model="date" />
                                 </PopoverContent>
                             </Popover>
                         </div>
@@ -110,7 +133,7 @@
                             <Label for="username" class="text-right">
                                 Bill
                             </Label>
-                            <Input id="username" v-model="bill" type="number"  class="col-span-3" />
+                            <Input id="username" v-model="bill" type="number" class="col-span-3" />
                         </div>
                     </div>
                     <DialogFooter>
@@ -212,10 +235,12 @@
                                             </DialogDescription>
                                         </DialogHeader>
                                         <DialogFooter>
-                                            <Button variant="success" @click="updateStatus(customer.customerName,'Paid')" type="submit">
+                                            <Button variant="success" @click="updateStatus(customer.customerName, 'Paid')"
+                                                type="submit">
                                                 Make as Paid
                                             </Button>
-                                            <Button variant="destructive" @click="updateStatus(customer.customerName,'Unpaid')" type="submit">
+                                            <Button variant="destructive"
+                                                @click="updateStatus(customer.customerName, 'Unpaid')" type="submit">
                                                 Make as Unpaid
                                             </Button>
                                         </DialogFooter>
@@ -238,9 +263,9 @@ import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
 } from '@/components/ui/popover'
 
 const date = ref<Date>()
@@ -288,12 +313,16 @@ type Customer = {
     [key: string]: string; // Add index signature
 };
 
+const updateSearch = (choice: string) => {
+    search.value = choice;
+};
+
 const handleClick = (choice: string) => {
     filterChoice.value = choice as string;
 };
 
-const updateStatus = (name: string,status: string) => {
-    console.log(name , 'is ' , status);
+const updateStatus = (name: string, status: string) => {
+    console.log(name, 'is ', status);
 };
 
 const addPayable = () => {
