@@ -9,7 +9,7 @@
                     class="w-full px-3 py-2 text-sm leading-tight dark:text-white text-gray-700 bg-transparent rounded appearance-none focus:outline-none focus:shadow-outline" />
             </div>
             <Button>Add payable</Button>
-            
+
         </div>
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -87,7 +87,31 @@
                             {{ product.status }}
                         </td>
                         <td class="px-6 py-4 text-left">
-                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                            <div class="flex gap-4">
+                                
+                            <AlertDialog>
+                                <AlertDialogTrigger as-child>
+                                    <Button variant="success">
+                                        <span class="material-symbols-outlined">
+                                            edit
+                                        </span>
+                                    </Button>
+                                </AlertDialogTrigger>
+                                <AlertDialogContent>
+                                    <AlertDialogHeader>
+                                        <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                                        <AlertDialogDescription>
+                                            This action cannot be undone. This will permanently delete your
+                                            account and remove your data from our servers.
+                                        </AlertDialogDescription>
+                                    </AlertDialogHeader>
+                                    <AlertDialogFooter>
+                                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                        <AlertDialogAction>Continue</AlertDialogAction>
+                                    </AlertDialogFooter>
+                                </AlertDialogContent>
+                            </AlertDialog>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
@@ -97,9 +121,21 @@
 </template>
 
 <script setup lang="ts">
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog'
+import { Button } from '@/components/ui/button'
 import { ref, reactive, onMounted, computed } from 'vue';
 import { initFlowbite } from 'flowbite'
-import { Button } from '@/components/ui/button'
+
 
 onMounted(() => {
     initFlowbite()
