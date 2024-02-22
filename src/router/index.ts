@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import LoginView from '../views/login_view.vue';
 import DashboardView from '../views/dashboard_view.vue';
+import CustomerView from '../views/customer_view.vue';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 const routes: RouteRecordRaw[] = [
@@ -16,6 +17,14 @@ const routes: RouteRecordRaw[] = [
     path: '/dashboard',
     name: 'dashboard',
     component: DashboardView,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/customer',
+    name: 'customer',
+    component: CustomerView,
     meta: {
       requiresAuth: true,
     },

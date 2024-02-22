@@ -179,11 +179,11 @@ onMounted(() => {
 
             </li>
             <li>
-               <router-link :to="{ path: '/' }"
-                  :class="{ 'bg-gray-700': darkMode && isActive('/recipe'), 'bg-gray-300': !darkMode && isActive('/recipe') }"
+               <router-link :to="{ path: '/customer' }"
+                  :class="{ 'bg-gray-700': darkMode && isActive('/customer'), 'bg-gray-300': !darkMode && isActive('/customer') }"
                   class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700 group">
                   <span
-                     :class="{ 'text-gray-900': darkMode && isActive('/recipe'), 'text-gray-500': !darkMode && isActive('/recipe') }"
+                     :class="{ 'text-gray-900': darkMode && isActive('/customer'), 'text-gray-500': !darkMode && isActive('/customer') }"
                      class="material-symbols-outlined flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                      aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
                      <span class="material-symbols-outlined">
