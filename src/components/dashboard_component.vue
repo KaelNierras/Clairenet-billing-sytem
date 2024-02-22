@@ -382,10 +382,12 @@ const sort = (key: keyof Customer) => {
 };
 
 const filteredCustomer = computed(() => {
-    if (search.value) {
+    if (search.value && filterChoice.value !== 'status') {
         return products.value.filter(product =>
             product[filterChoice.value].toLowerCase().includes(search.value.toLowerCase())
         );
+    } else if (filterChoice.value == 'status' && search.value.toLowerCase() === 'paid') {
+        return products.value.filter(product => product.status === 'Paid');
     } else {
         return products.value;
     }
