@@ -1,15 +1,54 @@
 <template>
     <div class="car rounded bg-gray-50 dark:bg-gray-700">
         <div class="p-4 flex flex-row justify-between items-center">
-            <div class="flex gap-2 items-center p-2 rounded w-1/2 sm:1/3" style="background-color: rgba(255, 255, 255, 0.299);">
+            <div class="flex gap-2 items-center p-2 rounded w-1/2 sm:1/3"
+                style="background-color: rgba(255, 255, 255, 0.299);">
                 <span class="material-symbols-outlined">
                     search
                 </span>
-                <input v-model="search" type="text" placeholder="Search customer"
+                <input v-model="search" type="text" :placeholder="'Search ' + textConverter(filterChoice)"
                     class="w-full px-3 py-2 text-sm leading-tight dark:text-white text-gray-700 bg-transparent rounded appearance-none focus:outline-none focus:shadow-outline" />
+                <DropdownMenu>
+                    <DropdownMenuTrigger as-child>
+                        <Button variant="outline">
+                            <span class="material-symbols-outlined">
+                                filter_alt
+                            </span>
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent class="w-56">
+                        <DropdownMenuLabel>Filter categories</DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuGroup>
+                            <DropdownMenuItem @click="handleClick('customerName')">
+                                <span class="material-symbols-outlined mr-2">
+                                    person
+                                </span>
+                                <span>Customer Name</span>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem @click="handleClick('address')">
+                                <span class="material-symbols-outlined mr-2">
+                                    pin_drop
+                                </span>
+                                <span>Address</span>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem @click="handleClick('dueDate')">
+                                <span class="material-symbols-outlined mr-2">
+                                    payments
+                                </span>
+                                <span>Due Date</span>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem @click="handleClick('status')">
+                                <span class="material-symbols-outlined mr-2">
+                                    checklist_rtl
+                                </span>
+                                <span>Status</span>
+                            </DropdownMenuItem>
+                        </DropdownMenuGroup>
+                    </DropdownMenuContent>
+                </DropdownMenu>
             </div>
             <Button>Add payable</Button>
-
         </div>
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -88,29 +127,29 @@
                         </td>
                         <td class="px-6 py-4 text-left">
                             <div class="flex gap-4">
-                                
-                            <AlertDialog>
-                                <AlertDialogTrigger as-child>
-                                    <Button variant="success">
-                                        <span class="material-symbols-outlined">
-                                            edit
-                                        </span>
-                                    </Button>
-                                </AlertDialogTrigger>
-                                <AlertDialogContent>
-                                    <AlertDialogHeader>
-                                        <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                                        <AlertDialogDescription>
-                                            This action cannot be undone. This will permanently delete your
-                                            account and remove your data from our servers.
-                                        </AlertDialogDescription>
-                                    </AlertDialogHeader>
-                                    <AlertDialogFooter>
-                                        <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                        <AlertDialogAction>Continue</AlertDialogAction>
-                                    </AlertDialogFooter>
-                                </AlertDialogContent>
-                            </AlertDialog>
+
+                                <AlertDialog>
+                                    <AlertDialogTrigger as-child>
+                                        <Button variant="success">
+                                            <span class="material-symbols-outlined">
+                                                edit
+                                            </span>
+                                        </Button>
+                                    </AlertDialogTrigger>
+                                    <AlertDialogContent>
+                                        <AlertDialogHeader>
+                                            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                                            <AlertDialogDescription>
+                                                This action cannot be undone. This will permanently delete your
+                                                account and remove your data from our servers.
+                                            </AlertDialogDescription>
+                                        </AlertDialogHeader>
+                                        <AlertDialogFooter>
+                                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                            <AlertDialogAction>Continue</AlertDialogAction>
+                                        </AlertDialogFooter>
+                                    </AlertDialogContent>
+                                </AlertDialog>
                             </div>
                         </td>
                     </tr>
@@ -121,21 +160,32 @@
 </template>
 
 <script setup lang="ts">
+//Shadcn Imports
 import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
+
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+
 import { Button } from '@/components/ui/button'
 import { ref, reactive, onMounted, computed } from 'vue';
 import { initFlowbite } from 'flowbite'
-
 
 onMounted(() => {
     initFlowbite()
@@ -147,7 +197,30 @@ type Product = {
     dueDate: string;
     bill: string;
     status: string;
+    [key: string]: string; // Add index signature
 };
+
+const handleClick = (choice: string) => {
+    filterChoice.value = choice as string;
+};
+
+const textConverter = (text: string) => {
+    switch(text) {
+        case 'customerName':
+            return 'Customer Name';
+        case 'address':
+            return 'Address';
+        case 'dueDate':
+            return 'Due Date';
+        case 'status':
+            return 'Status';
+        default:
+            return text;
+    }
+};
+
+const search = ref('');
+let filterChoice = ref('customerName'); // default filter choice
 
 type SortOrders = {
     [K in keyof Product]?: number;
@@ -177,11 +250,11 @@ const sort = (key: keyof Product) => {
     });
 };
 
-const search = ref('');
-
 const filteredProducts = computed(() => {
     if (search.value) {
-        return products.value.filter(product => product.customerName.toLowerCase().includes(search.value.toLowerCase()));
+        return products.value.filter(product =>
+            product[filterChoice.value].toLowerCase().includes(search.value.toLowerCase())
+        );
     } else {
         return products.value;
     }

@@ -6,9 +6,48 @@
                 <span class="material-symbols-outlined">
                     search
                 </span>
-                <input v-model="search" type="text" placeholder="Search customer"
+                <input v-model="search" type="text" :placeholder="'Search ' + textConverter(filterChoice)"
                     class="w-full px-3 py-2 text-sm leading-tight dark:text-white text-gray-700 bg-transparent rounded appearance-none focus:outline-none focus:shadow-outline" />
-            </div>
+                    <DropdownMenu>
+                    <DropdownMenuTrigger as-child>
+                        <Button variant="outline">
+                            <span class="material-symbols-outlined">
+                                filter_alt
+                            </span>
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent class="w-56">
+                        <DropdownMenuLabel>Filter categories</DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuGroup>
+                            <DropdownMenuItem @click="handleClick('customerName')">
+                                <span class="material-symbols-outlined mr-2">
+                                    person
+                                </span>
+                                <span>Customer Name</span>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem @click="handleClick('email')">
+                                <span class="material-symbols-outlined mr-2">
+                                    email
+                                </span>
+                                <span>Email</span>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem @click="handleClick('phone')">
+                                <span class="material-symbols-outlined mr-2">
+                                    call
+                                </span>
+                                <span>Phone</span>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem @click="handleClick('registeredDate')">
+                                <span class="material-symbols-outlined mr-2">
+                                    how_to_reg
+                                </span>
+                                <span>Registered Date</span>
+                            </DropdownMenuItem>
+                        </DropdownMenuGroup>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+                </div>
             <Button>Add customers</Button>
         </div>
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -52,17 +91,6 @@
                             </div>
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            <div class="flex flex-row items-center gap-3">
-                                <div class="flex flex-row items-center gap-3">
-                                    Last Order Date
-                                    <span class="material-symbols-outlined hover:cursor-pointer text-xl hover:text-blue-500"
-                                        @click="sort('lastOrderDate')">
-                                        swap_vert
-                                    </span>
-                                </div>
-                            </div>
-                        </th>
-                        <th scope="col" class="px-6 py-3">
                             Action
                             <span class="sr-only">Edit</span>
                         </th>
@@ -82,9 +110,6 @@
                         </td>
                         <td class="px-6 py-4">
                             {{ customer.registeredDate }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ customer.lastOrderDate }}
                         </td>
                         <td class="px-6 py-4 text-left">
                             <div class="flex gap-4">
@@ -131,6 +156,16 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
+
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 import { Button } from '@/components/ui/button'
 import { ref, reactive, onMounted, computed } from 'vue';
 import { initFlowbite } from 'flowbite'
@@ -139,12 +174,30 @@ onMounted(() => {
     initFlowbite()
 });
 
+const search = ref('');
+let filterChoice = ref('customerName'); // default filter choice
+
 type Customer = {
     customerName: string;
     email: string;
     phone: string;
     registeredDate: string;
-    lastOrderDate: string;
+    [key: string]: string; // Add index signature
+};
+
+const textConverter = (text: string) => {
+    switch(text) {
+        case 'customerName':
+            return 'Customer Name';
+        case 'email':
+            return 'Email';
+        case 'phone':
+            return 'Phone';
+        case 'registeredDate':
+            return 'Registered Date';
+        default:
+            return text;
+    }
 };
 
 type SortOrders = {
@@ -152,9 +205,9 @@ type SortOrders = {
 };
 
 const customers = ref<Customer[]>([
-    { customerName: 'John Doe', email: 'john.doe@example.com', phone: '123-456-7890', registeredDate: '2022-01-01', lastOrderDate: '2022-12-31' },
-    { customerName: 'Jane Doe', email: 'jane.doe@example.com', phone: '234-567-8901', registeredDate: '2022-02-01', lastOrderDate: '2022-12-30' },
-    { customerName: 'Bob Smith', email: 'bob.smith@example.com', phone: '345-678-9012', registeredDate: '2022-03-01', lastOrderDate: '2022-12-29' },
+    { customerName: 'John Doe', email: 'john.doe@example.com', phone: '123-456-7890', registeredDate: '2022-01-01',  },
+    { customerName: 'Jane Doe', email: 'jane.doe@example.com', phone: '234-567-8901', registeredDate: '2022-02-01', },
+    { customerName: 'Bob Smith', email: 'bob.smith@example.com', phone: '345-678-9012', registeredDate: '2022-03-01', },
 ]);
 
 const sortKey = ref<keyof Customer | ''>('');
@@ -163,7 +216,6 @@ const sortOrders = reactive<SortOrders>({
     email: 1,
     phone: 1,
     registeredDate: 1,
-    lastOrderDate: 1
 });
 
 const sort = (key: keyof Customer) => {
@@ -176,11 +228,15 @@ const sort = (key: keyof Customer) => {
     });
 };
 
-const search = ref('');
+const handleClick = (choice: string) => {
+    filterChoice.value = choice as string;
+};
 
 const filteredCustomers = computed(() => {
     if (search.value) {
-        return customers.value.filter(customer => customer.customerName.toLowerCase().includes(search.value.toLowerCase()));
+        return customers.value.filter(customers =>
+            customers[filterChoice.value].toLowerCase().includes(search.value.toLowerCase())
+        );
     } else {
         return customers.value;
     }
