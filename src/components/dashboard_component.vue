@@ -68,7 +68,7 @@
                     <DialogHeader>
                         <DialogTitle>Add payable</DialogTitle>
                         <DialogDescription>
-                            Add a payable to the Customer.
+                            Add a payable to a Customer.
                         </DialogDescription>
                     </DialogHeader>
                     <div class="grid gap-4 py-4">
