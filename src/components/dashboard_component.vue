@@ -1,21 +1,15 @@
 <template>
-    <Alert class="mb-5 w-64">
-        <Terminal class="h-4 w-4" />
-        <AlertTitle>Heads up!</AlertTitle>
-        <AlertDescription>
-            You can add components to your app using the cli.
-        </AlertDescription>
-    </Alert>
+    <h5 class="mb-5 font-bold">Upcoming Due</h5>
     <div class="flex flex-row gap-5">
         <Alert v-for="(item, index) in upComingDueList" :key="index" class="mb-5 w-64">
-            <Terminal class="h-4 w-4" />
+            <ReceiptText class="h-4 w-4" />
             <AlertTitle>{{ item.name }}</AlertTitle>
             <AlertDescription>
                 {{ item.date }}
             </AlertDescription>
         </Alert>
     </div>
-    <div class="card rounded bg-gray-50 dark:bg-gray-700 mt-5">
+    <div class="card rounded bg-gray-50 dark:bg-gray-700 mt-2">
         <div class="p-4 flex flex-row justify-between items-center">
             <div class="flex gap-2 items-center p-2 rounded w-1/2 sm:1/3"
                 style="background-color: rgba(255, 255, 255, 0.299);">
@@ -210,7 +204,7 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 
-import { Terminal } from 'lucide-vue-next'
+import { ReceiptText } from 'lucide-vue-next'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { ref, reactive, onMounted, computed } from 'vue';
