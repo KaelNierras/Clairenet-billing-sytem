@@ -1,5 +1,13 @@
 <template>
-    <div class="car rounded bg-gray-50 dark:bg-gray-700">
+    <h2 class="text-2xl font-semibold text-gray-800 dark:text-white mb-5">Due in 3 days!</h2>
+    <div class="flex flex-row gap-5">       
+        <a v-for="(item, index) in upComingDueList" :key="index"
+            href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ item.name }}</h5>
+            <p class="font-normal text-gray-700 dark:text-gray-400">{{ item.date }}</p>
+        </a>
+        </div>
+    <div class="card rounded bg-gray-50 dark:bg-gray-700 mt-5">
         <div class="p-4 flex flex-row justify-between items-center">
             <div class="flex gap-2 items-center p-2 rounded w-1/2 sm:1/3"
                 style="background-color: rgba(255, 255, 255, 0.299);">
@@ -230,6 +238,12 @@ const products = ref<Product[]>([
     { customerName: 'John Doe', address: '123 Main St', dueDate: '2022-12-31', bill: 'Bill001', status: 'Paid' },
     { customerName: 'Jane Doe', address: '456 Oak St', dueDate: '2023-01-31', bill: 'Bill002', status: 'Unpaid' },
     { customerName: 'Bob Smith', address: '789 Pine St', dueDate: '2022-11-30', bill: 'Bill003', status: 'Paid' },
+]);
+
+const upComingDueList = ref([
+  { name: 'John Doe', date: '2022-12-31' },
+  { name: 'Jane Doe', date: '2022-12-30' },
+  { name: 'Jim Doe', date: '2022-12-29' },
 ]);
 
 const sortKey = ref<keyof Product | ''>('');
