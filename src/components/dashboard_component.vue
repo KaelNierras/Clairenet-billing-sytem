@@ -179,22 +179,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(product, index) in filteredProducts" :key="index"
+                    <tr v-for="(customer, index) in filteredCustomer" :key="index"
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ product.customerName }}
+                            {{ customer.customerName }}
                         </th>
                         <td class="px-6 py-4">
-                            {{ product.address }}
+                            {{ customer.address }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ product.dueDate }}
+                            {{ customer.dueDate }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ product.bill }}
+                            {{ customer.bill }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ product.status }}
+                            {{ customer.status }}
                         </td>
                         <td class="px-6 py-4 text-left">
                             <div class="flex gap-4">
@@ -212,10 +212,10 @@
                                             </DialogDescription>
                                         </DialogHeader>
                                         <DialogFooter>
-                                            <Button variant="success" type="submit">
+                                            <Button variant="success" @click="updateStatus(customer.customerName,'Paid')" type="submit">
                                                 Make as Paid
                                             </Button>
-                                            <Button variant="destructive" type="submit">
+                                            <Button variant="destructive" @click="updateStatus(customer.customerName,'Unpaid')" type="submit">
                                                 Make as Unpaid
                                             </Button>
                                         </DialogFooter>
@@ -279,7 +279,7 @@ onMounted(() => {
     initFlowbite()
 });
 
-type Product = {
+type Customer = {
     customerName: string;
     address: string;
     dueDate: string;
@@ -290,6 +290,10 @@ type Product = {
 
 const handleClick = (choice: string) => {
     filterChoice.value = choice as string;
+};
+
+const updateStatus = (name: string,status: string) => {
+    console.log(name , 'is ' , status);
 };
 
 const textConverter = (text: string) => {
@@ -311,10 +315,10 @@ const search = ref('');
 let filterChoice = ref('customerName'); // default filter choice
 
 type SortOrders = {
-    [K in keyof Product]?: number;
+    [K in keyof Customer]?: number;
 };
 
-const products = ref<Product[]>([
+const products = ref<Customer[]>([
     { customerName: 'John Doe', address: '123 Main St', dueDate: '2022-12-31', bill: 'Bill001', status: 'Paid' },
     { customerName: 'Jane Doe', address: '456 Oak St', dueDate: '2023-01-31', bill: 'Bill002', status: 'Unpaid' },
     { customerName: 'Bob Smith', address: '789 Pine St', dueDate: '2022-11-30', bill: 'Bill003', status: 'Paid' },
@@ -326,7 +330,7 @@ const upComingDueList = ref([
     { name: 'Jim Doe', date: '2022-12-29' },
 ]);
 
-const sortKey = ref<keyof Product | ''>('');
+const sortKey = ref<keyof Customer | ''>('');
 const sortOrders = reactive<SortOrders>({
     customerName: 1,
     address: 1,
@@ -334,7 +338,7 @@ const sortOrders = reactive<SortOrders>({
     status: 1
 });
 
-const sort = (key: keyof Product) => {
+const sort = (key: keyof Customer) => {
     sortKey.value = key;
     sortOrders[key] = sortOrders[key]! * -1;
     products.value.sort((a, b) => {
@@ -344,7 +348,7 @@ const sort = (key: keyof Product) => {
     });
 };
 
-const filteredProducts = computed(() => {
+const filteredCustomer = computed(() => {
     if (search.value) {
         return products.value.filter(product =>
             product[filterChoice.value].toLowerCase().includes(search.value.toLowerCase())
