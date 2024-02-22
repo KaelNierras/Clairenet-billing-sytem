@@ -102,13 +102,23 @@
                             <Label for="name" class="text-right">
                                 Name
                             </Label>
-                            <Input id="name" v-model="name" type="text" class="col-span-3" />
+                            <Input v-model="name" type="text" class="col-span-3" />
                         </div>
                         <div class="grid grid-cols-4 items-center gap-4">
                             <Label for="username" class="text-right">
                                 Address
                             </Label>
-                            <Input id="username" v-model="address" type="text" class="col-span-3" />
+                            <!-- <div class="grid grid-cols-1">
+                                <Input v-model="address" type="text" class="col-span-1" />
+                            </div>
+                            <div class="grid grid-cols-1">
+                                <Input v-model="address" type="text" class="col-span-1" />
+                            </div>
+                            <div class="grid grid-cols-1">
+                                <Input v-model="address" type="text" class="col-span-1" />
+                            </div> -->
+                            <Input v-model="address" type="text" class="col-span-3" />
+
                         </div>
                         <div class="grid grid-cols-4 items-center gap-4">
                             <Label for="username" class="text-right">
@@ -133,7 +143,7 @@
                             <Label for="username" class="text-right">
                                 Bill
                             </Label>
-                            <Input id="username" v-model="bill" type="number" class="col-span-3" />
+                            <Input v-model="bill" min="0" type="number" class="col-span-3" />
                         </div>
                     </div>
                     <DialogFooter>
@@ -267,12 +277,6 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from '@/components/ui/popover'
-
-const date = ref<Date>()
-const name = ref('')
-const address = ref('')
-const bill = ref('')
-
 import {
     Dialog,
     DialogContent,
@@ -303,6 +307,11 @@ import { initFlowbite } from 'flowbite'
 onMounted(() => {
     initFlowbite()
 });
+
+const date = ref<Date>()
+const name = ref('')
+const address = ref('')
+const bill = ref('')
 
 type Customer = {
     customerName: string;
