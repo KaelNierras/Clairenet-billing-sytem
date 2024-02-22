@@ -119,7 +119,7 @@ onMounted(() => {
                <!-- <a href="/" class="flex ms-2 md:me-24">
                   <img :src="darkMode ? '/logo_dark.png' : '/logo_light.png'" class="h-9 me-3" alt="VoteHub Logo" />
                </a> -->
-       
+
                <router-link :to="{ path: '/dashboard' }"
                   class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700 group">
                   <h4 class="text-1xl font-bold">Clairenet Billing System</h4>
@@ -154,7 +154,8 @@ onMounted(() => {
    <aside id="logo-sidebar"
       class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-slate-100 border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
       aria-label="Sidebar">
-      <div class="h-full px-3 pb-4 overflow-y-auto bg-slate-100 dark:bg-gray-800 d-flex flex-column justify-content-between">
+      <div
+         class="h-full px-3 pb-4 overflow-y-auto bg-slate-100 dark:bg-gray-800 d-flex flex-column justify-content-between">
          <!-- <div class="flex flow-row justify-Start ml-2 items-center mt-12 sm:mt-2">
             <img :src="photoURL" class="w-8 h-8 rounded-full mr-2" alt="Profile Picture" /> 
             <div class="flex flex-col justify-center items-start">
@@ -165,7 +166,7 @@ onMounted(() => {
          <hr class=" border-gray-700 dark:border-white my-6"> -->
          <ul class="space-y-2 font-medium mt-2 sm:mt-2">
             <li>
-               <router-link :to="{ path: '/dashboard' }" 
+               <router-link :to="{ path: '/dashboard' }"
                   :class="{ 'bg-gray-700': darkMode && isActive('/dashboard'), 'bg-gray-300': !darkMode && isActive('/dashboard') }"
                   class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700 group">
                   <span
@@ -187,17 +188,17 @@ onMounted(() => {
                      class="material-symbols-outlined flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                      aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
                      <span class="material-symbols-outlined">
-                     groups
-                  </span>
+                        groups
+                     </span>
                   </span>
                   <span class="flex-1 ms-3 whitespace-nowrap">Customer</span>
                </router-link>
             </li>
          </ul>
-         
-         
+
+
       </div>
-      
+
    </aside>
 
    <div class="sm:ml-72 p-5">
