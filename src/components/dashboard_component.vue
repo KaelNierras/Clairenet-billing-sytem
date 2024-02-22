@@ -115,7 +115,7 @@
                     </div>
                     <DialogFooter>
                         <Button type="submit">
-                            Save changes
+                            Add
                         </Button>
                     </DialogFooter>
                 </DialogContent>
