@@ -155,15 +155,15 @@ onMounted(() => {
       class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-slate-100 border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
       aria-label="Sidebar">
       <div class="h-full px-3 pb-4 overflow-y-auto bg-slate-100 dark:bg-gray-800 d-flex flex-column justify-content-between">
-         <div class="flex flow-row justify-Start ml-2 items-center mt-12 sm:mt-2">
+         <!-- <div class="flex flow-row justify-Start ml-2 items-center mt-12 sm:mt-2">
             <img :src="photoURL" class="w-8 h-8 rounded-full mr-2" alt="Profile Picture" /> 
             <div class="flex flex-col justify-center items-start">
                <p class=" text-xs"> {{ user_name }}</p>
                <p class=" text-xs"> {{ email }}</p>
             </div>  
          </div>
-         <hr class=" border-gray-700 dark:border-white my-6">
-         <ul class="space-y-2 font-medium">
+         <hr class=" border-gray-700 dark:border-white my-6"> -->
+         <ul class="space-y-2 font-medium  mt-12 sm:mt-2">
             <li>
                <router-link :to="{ path: '/dashboard' }" 
                   :class="{ 'bg-gray-700': darkMode && isActive('/dashboard'), 'bg-gray-300': !darkMode && isActive('/dashboard') }"
