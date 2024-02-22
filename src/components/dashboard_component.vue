@@ -1,11 +1,11 @@
 <template>
     <h5 class="mb-5 font-bold">Upcoming Due</h5>
     <div class="flex flex-row gap-5">
-        <Alert v-for="(item, index) in upComingDueList" :key="index" class="mb-5 w-64">
+        <Alert v-for="(list, index) in upComingDueList" :key="index" class="mb-5 w-64">
             <ReceiptText class="h-4 w-4" />
-            <AlertTitle>{{ item.name }}</AlertTitle>
+            <AlertTitle>{{ list.name }}</AlertTitle>
             <AlertDescription>
-                {{ item.date }}
+                {{ list.date }}
             </AlertDescription>
         </Alert>
     </div>
