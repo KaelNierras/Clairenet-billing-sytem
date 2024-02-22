@@ -318,6 +318,7 @@ const updateSearch = (choice: string) => {
 };
 
 const handleClick = (choice: string) => {
+    search.value = '';
     filterChoice.value = choice as string;
 };
 
