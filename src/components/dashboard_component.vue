@@ -58,7 +58,52 @@
                     </DropdownMenuContent>
                 </DropdownMenu>
             </div>
-            <Button>Add payable</Button>
+            <Dialog>
+                <DialogTrigger as-child>
+                    <Button variant="outline">
+                        Add payable
+                    </Button>
+                </DialogTrigger>
+                <DialogContent class="sm:max-w-[425px]">
+                    <DialogHeader>
+                        <DialogTitle>Add payable</DialogTitle>
+                        <DialogDescription>
+                            Add a payable to the Customer. 
+                        </DialogDescription>
+                    </DialogHeader>
+                    <div class="grid gap-4 py-4">
+                        <div class="grid grid-cols-4 items-center gap-4">
+                            <Label for="name" class="text-right">
+                                Name
+                            </Label>
+                            <Input id="name" value="Pedro Duarte" class="col-span-3" />
+                        </div>
+                        <div class="grid grid-cols-4 items-center gap-4">
+                            <Label for="username" class="text-right">
+                                Address
+                            </Label>
+                            <Input id="username" value="@peduarte" class="col-span-3" />
+                        </div>
+                        <div class="grid grid-cols-4 items-center gap-4">
+                            <Label for="username" class="text-right">
+                                Due Date
+                            </Label>
+                            <Input id="username" value="@peduarte" class="col-span-3" />
+                        </div>
+                        <div class="grid grid-cols-4 items-center gap-4">
+                            <Label for="username" class="text-right">
+                                Bill
+                            </Label>
+                            <Input id="username" value="@peduarte" class="col-span-3" />
+                        </div>
+                    </div>
+                    <DialogFooter>
+                        <Button type="submit">
+                            Save changes
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
         </div>
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
