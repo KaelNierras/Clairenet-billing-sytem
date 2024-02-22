@@ -122,7 +122,7 @@ onMounted(() => {
        
                <router-link :to="{ path: '/dashboard' }"
                   class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700 group">
-                  <h4 class="text-2xl font-bold">Clairenet Billing System</h4>
+                  <h4 class="text-1xl font-bold">Clairenet Billing System</h4>
                </router-link>
 
             </div>
@@ -163,7 +163,7 @@ onMounted(() => {
             </div>  
          </div>
          <hr class=" border-gray-700 dark:border-white my-6"> -->
-         <ul class="space-y-2 font-medium  mt-12 sm:mt-2">
+         <ul class="space-y-2 font-medium mt-2 sm:mt-2">
             <li>
                <router-link :to="{ path: '/dashboard' }" 
                   :class="{ 'bg-gray-700': darkMode && isActive('/dashboard'), 'bg-gray-300': !darkMode && isActive('/dashboard') }"
@@ -200,8 +200,8 @@ onMounted(() => {
       
    </aside>
 
-   <div class="sm:ml-64">
-      <div class=" pt-28">
+   <div class="sm:ml-72 p-5">
+      <div class=" pt-20 sm:pt-20">
          <RouterView />
       </div>
    </div>

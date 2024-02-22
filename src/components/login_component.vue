@@ -6,12 +6,18 @@ import { useRouter } from 'vue-router';
 
 const router = useRouter();
 
-const email = ref('');
+const email = ref(localStorage.getItem('rememberMe') || '');
 const password = ref('');
+const rememberMe = ref(localStorage.getItem('rememberMe') ? true : false);
 
 const signInWithEmail = async (email: string, password: string) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
+    if (rememberMe.value) {
+        localStorage.setItem('rememberMe', email);
+    } else {
+        localStorage.removeItem('rememberMe');
+    }
     window.alert('You have successfully signed in');
     router.push('/dashboard');
   } catch (error: any) {
@@ -42,7 +48,7 @@ const signInWithEmail = async (email: string, password: string) => {
             <div class="flex items-start">
                 <div class="flex items-start">
                     <div class="flex items-center h-5">
-                        <input id="remember" type="checkbox" value=""
+                        <input v-model="rememberMe" id="remember" type="checkbox" value=""
                             class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
                              />
                     </div>
