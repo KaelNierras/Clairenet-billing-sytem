@@ -174,9 +174,12 @@ onMounted(() => {
     initFlowbite()
 });
 
+//Reactive variables
 const search = ref('');
-let filterChoice = ref('customerName'); // default filter choice
+let filterChoice = ref('customerName'); 
+const sortKey = ref<keyof Customer | ''>('');
 
+// Define the Customer type
 type Customer = {
     customerName: string;
     email: string;
@@ -185,6 +188,7 @@ type Customer = {
     [key: string]: string; // Add index signature
 };
 
+// Convert text to human readable format
 const textConverter = (text: string) => {
     switch(text) {
         case 'customerName':
@@ -200,17 +204,12 @@ const textConverter = (text: string) => {
     }
 };
 
+// Define the SortOrders type
 type SortOrders = {
     [K in keyof Customer]?: number;
 };
 
-const customers = ref<Customer[]>([
-    { customerName: 'John Doe', email: 'john.doe@example.com', phone: '123-456-7890', registeredDate: '2022-01-01',  },
-    { customerName: 'Jane Doe', email: 'jane.doe@example.com', phone: '234-567-8901', registeredDate: '2022-02-01', },
-    { customerName: 'Bob Smith', email: 'bob.smith@example.com', phone: '345-678-9012', registeredDate: '2022-03-01', },
-]);
-
-const sortKey = ref<keyof Customer | ''>('');
+// Create a reactive variable to store the sort orders
 const sortOrders = reactive<SortOrders>({
     customerName: 1,
     email: 1,
@@ -218,6 +217,7 @@ const sortOrders = reactive<SortOrders>({
     registeredDate: 1,
 });
 
+// Sort the customers
 const sort = (key: keyof Customer) => {
     sortKey.value = key;
     sortOrders[key] = sortOrders[key]! * -1;
@@ -228,10 +228,12 @@ const sort = (key: keyof Customer) => {
     });
 };
 
+// Handle the filter choice
 const handleClick = (choice: string) => {
     filterChoice.value = choice as string;
 };
 
+// Filter the customers
 const filteredCustomers = computed(() => {
     if (search.value) {
         return customers.value.filter(customers =>
@@ -241,4 +243,11 @@ const filteredCustomers = computed(() => {
         return customers.value;
     }
 });
+
+//Firebase data
+const customers = ref<Customer[]>([
+    { customerName: 'John Doe', email: 'john.doe@example.com', phone: '123-456-7890', registeredDate: '2022-01-01',  },
+    { customerName: 'Jane Doe', email: 'jane.doe@example.com', phone: '234-567-8901', registeredDate: '2022-02-01', },
+    { customerName: 'Bob Smith', email: 'bob.smith@example.com', phone: '345-678-9012', registeredDate: '2022-03-01', },
+]);
 </script>

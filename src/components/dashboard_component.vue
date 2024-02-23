@@ -3,7 +3,7 @@
     <div class="flex flex-row gap-5">
         <Alert v-for="(list, index) in upComingDueList" :key="index" class="mb-5 w-64">
             <ReceiptText class="h-4 w-4" />
-            <AlertTitle>{{ list.name }}</AlertTitle>
+            <AlertTitle>{{ list.custorName }}</AlertTitle>
             <AlertDescription>
                 {{ list.dueDate }}
             </AlertDescription>
@@ -99,13 +99,13 @@
                     </DialogHeader>
                     <div class="grid gap-4 py-4">
                         <div class="grid grid-cols-4 items-center gap-4">
-                            <Label for="name" class="text-right">
+                            <Label class="text-right">
                                 Name
                             </Label>
-                            <Input v-model="name" type="text" class="col-span-3" />
+                            <Input v-model="customerName" type="text" class="col-span-3" />
                         </div>
                         <div class="grid grid-cols-4 items-center gap-4">
-                            <Label for="username" class="text-right">
+                            <Label class="text-right">
                                 Address
                             </Label>
                             <!-- <div class="grid grid-cols-1">
@@ -121,7 +121,7 @@
 
                         </div>
                         <div class="grid grid-cols-4 items-center gap-4">
-                            <Label for="username" class="text-right">
+                            <Label class="text-right">
                                 Due Date
                             </Label>
                             <Popover>
@@ -140,7 +140,7 @@
                             </Popover>
                         </div>
                         <div class="grid grid-cols-4 items-center gap-4">
-                            <Label for="username" class="text-right">
+                            <Label class="text-right">
                                 Bill
                             </Label>
                             <Input v-model="bill" min="0" type="number" class="col-span-3" />
@@ -298,30 +298,47 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-
-import { ReceiptText } from 'lucide-vue-next'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+
+//Lucide Icons
+import { ReceiptText } from 'lucide-vue-next'
+
+//Vue Imports
 import { ref, reactive, onMounted, computed } from 'vue';
+
+//Flowbite Imports
 import { initFlowbite } from 'flowbite'
 
 onMounted(() => {
     initFlowbite()
 });
 
+//Reactive Variables
 const date = ref<Date>()
-const name = ref('')
+const customerName = ref('')
 const address = ref('')
 const bill = ref('')
+const search = ref('');
+let filterChoice = ref('customerName');
+const sortKey = ref<keyof Customer | ''>('');
+const sortOrders = reactive<SortOrders>({
+    customerName: 1,
+    address: 1,
+    dueDate: 1,
+    status: 1
+});
 
+//Customer that represents an object with specific properties
 type Customer = {
     customerName: string;
     address: string;
     dueDate: string;
     bill: string;
     status: string;
-    [key: string]: string; // Add index signature
+    [key: string]: string;
 };
 
+//Methods
 const updateSearch = (choice: string) => {
     search.value = choice;
 };
@@ -336,7 +353,7 @@ const updateStatus = (name: string, status: string) => {
 };
 
 const addPayable = () => {
-    console.log(name.value, address.value, date.value, bill.value);
+    console.log(customerName.value, address.value, date.value, bill.value);
 };
 
 const textConverter = (text: string) => {
@@ -354,32 +371,9 @@ const textConverter = (text: string) => {
     }
 };
 
-const search = ref('');
-let filterChoice = ref('customerName'); // default filter choice
-
 type SortOrders = {
     [K in keyof Customer]?: number;
 };
-
-const products = ref<Customer[]>([
-    { customerName: 'John Doe', address: '123 Main St', dueDate: '2022-12-31', bill: 'Bill001', status: 'Paid' },
-    { customerName: 'Jane Doe', address: '456 Oak St', dueDate: '2023-01-31', bill: 'Bill002', status: 'Unpaid' },
-    { customerName: 'Bob Smith', address: '789 Pine St', dueDate: '2022-11-30', bill: 'Bill003', status: 'Paid' },
-]);
-
-const upComingDueList = ref([
-    { name: 'John Doe', dueDate: '2022-12-31' },
-    { name: 'Jane Doe', dueDate: '2022-12-30' },
-    { name: 'Jim Doe', dueDate: '2022-12-29' },
-]);
-
-const sortKey = ref<keyof Customer | ''>('');
-const sortOrders = reactive<SortOrders>({
-    customerName: 1,
-    address: 1,
-    dueDate: 1,
-    status: 1
-});
 
 const sort = (key: keyof Customer) => {
     sortKey.value = key;
@@ -405,4 +399,19 @@ const filteredCustomer = computed(() => {
         return products.value;
     }
 });
+
+
+//Firebase Data
+const products = ref<Customer[]>([
+    { customerName: 'John Doe', address: '123 Main St', dueDate: '2022-12-31', bill: 'Bill001', status: 'Paid' },
+    { customerName: 'Jane Doe', address: '456 Oak St', dueDate: '2023-01-31', bill: 'Bill002', status: 'Unpaid' },
+    { customerName: 'Bob Smith', address: '789 Pine St', dueDate: '2022-11-30', bill: 'Bill003', status: 'Paid' },
+]);
+
+const upComingDueList = ref([
+    { custorName: 'John Doe', dueDate: '2022-12-31' },
+    { custorName: 'Jane Doe', dueDate: '2022-12-30' },
+    { custorName: 'Jim Doe', dueDate: '2022-12-29' },
+]);
+
 </script>
