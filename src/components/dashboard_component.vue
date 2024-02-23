@@ -13,7 +13,7 @@
     </div>
     <div class="card rounded border bg-card text-foreground mt-2">
         <div class="p-4 flex flex-row justify-between items-center">    
-            <div class="flex gap-2 items-center p-2 rounded w-1/2 sm:1/3"
+            <div class="flex gap-2 items-center p-2 rounded bg-accent/30 w-1/2 sm:1/3"
                 >
                 <span class="material-symbols-outlined">
                     search

@@ -1,7 +1,7 @@
 <template>
     <div class="card bg-card rounded border text-foreground mt-2">
         <div class="p-4 flex flex-row justify-between items-center">
-            <div class="flex gap-2 items-center p-2 rounded w-1/2 sm:1/3"
+            <div class="flex gap-2 items-center p-2 rounded w-1/2 bg-accent/30 sm:1/3"
                 >
                 <span class="material-symbols-outlined">
                     search
