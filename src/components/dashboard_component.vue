@@ -378,7 +378,7 @@ type SortOrders = {
 const sort = (key: keyof Customer) => {
     sortKey.value = key;
     sortOrders[key] = sortOrders[key]! * -1;
-    products.value.sort((a, b) => {
+    customers.value.sort((a, b) => {
         const aKey = a[key];
         const bKey = b[key];
         return (aKey === bKey ? 0 : aKey > bKey ? 1 : -1) * sortOrders[key]!;
@@ -387,22 +387,22 @@ const sort = (key: keyof Customer) => {
 
 const filteredCustomer = computed(() => {
     if (search.value && filterChoice.value !== 'status') {
-        return products.value.filter(product =>
-            product[filterChoice.value].toLowerCase().includes(search.value.toLowerCase())
+        return customers.value.filter(customers =>
+            customers[filterChoice.value].toLowerCase().includes(search.value.toLowerCase())
         );
     } else if (filterChoice.value == 'status' && search.value.toLowerCase() === 'paid') {
-        return products.value.filter(product => product.status === 'Paid');
+        return customers.value.filter(customers => customers.status === 'Paid');
     } else if (filterChoice.value == 'status' && search.value.toLowerCase() === 'unpaid') {
-        return products.value.filter(product => product.status === 'Unpaid');
+        return customers.value.filter(customers => customers.status === 'Unpaid');
     }
     else {
-        return products.value;
+        return customers.value;
     }
 });
 
 
 //Firebase Data
-const products = ref<Customer[]>([
+const customers = ref<Customer[]>([
     { customerName: 'John Doe', address: '123 Main St', dueDate: '2022-12-31', bill: 'Bill001', status: 'Paid' },
     { customerName: 'Jane Doe', address: '456 Oak St', dueDate: '2023-01-31', bill: 'Bill002', status: 'Unpaid' },
     { customerName: 'Bob Smith', address: '789 Pine St', dueDate: '2022-11-30', bill: 'Bill003', status: 'Paid' },
