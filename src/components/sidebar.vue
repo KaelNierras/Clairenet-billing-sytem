@@ -202,7 +202,7 @@ onMounted(() => {
    </aside>
 
    <div class="sm:ml-64 p-7">
-      <div class=" pt-20 sm:pt-20">
+      <div class=" pt-24 sm:pt-20">
          <RouterView />
       </div>
    </div>

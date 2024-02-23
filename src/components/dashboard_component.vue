@@ -1,13 +1,15 @@
 <template>
     <h5 class="mb-5 text-xl font-bold">Upcoming Due</h5>
-    <div class="flex flex-row gap-5">
-        <Alert v-for="(dueList, index) in upComingDueList" :key="index" class="mb-5 w-64">
+    <div class="flex flex-col gap-3 overflow-y-auto md:flex-row mb-5">
+        <Alert v-for="(dueList, index) in limitedUpComingDueList" :key="index" class="w-auto md:min-w-56">
             <ReceiptText class="h-4 w-4" />
             <AlertTitle>{{ dueList.custorName }}</AlertTitle>
             <AlertDescription>
                 {{ dueList.dueDate }}
             </AlertDescription>
         </Alert>
+        <button v-if="upComingDueList.length > limit" @click="seeAll" class="btn btn-primary justify-center item-center flex md:flex-col flex-row"><ChevronRightSquare /></button>
+        <button v-if="limit > 3" @click="seeLess" class="btn btn-primary justify-center item-center flex md:flex-col flex-row"><ChevronLeftSquare /></button>
     </div>
     <div class="card rounded bg-gray-50 dark:bg-gray-700 mt-2">
         <div class="p-4 flex flex-row justify-between items-center">    
@@ -301,10 +303,11 @@ import {
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 
 //Lucide Icons
-import { ReceiptText } from 'lucide-vue-next'
+import { ReceiptText, ChevronRightSquare, ChevronLeftSquare } from 'lucide-vue-next'
 
 //Vue Imports
 import { ref, reactive, onMounted, computed } from 'vue';
+
 
 //Flowbite Imports
 import { initFlowbite } from 'flowbite'
@@ -327,6 +330,7 @@ const sortOrders = reactive<SortOrders>({
     dueDate: 1,
     status: 1
 });
+const limit = ref(3);
 
 //Customer that represents an object with specific properties
 type Customer = {
@@ -354,6 +358,17 @@ const updateStatus = (name: string, status: string) => {
 
 const addPayable = () => {
     console.log(customerName.value, address.value, date.value, bill.value);
+};
+
+const limitedUpComingDueList = computed(() => upComingDueList.value.slice(0, limit.value));
+
+const seeAll = () => {
+    limit.value = upComingDueList.value.length; // Show all items
+};
+
+
+const seeLess = () => {
+    limit.value = 3; // Decrease limit by 3, but not less than 3
 };
 
 const textConverter = (text: string) => {
@@ -412,6 +427,20 @@ const upComingDueList = ref([
     { custorName: 'John Doe', dueDate: '2022-12-31' },
     { custorName: 'Jane Doe', dueDate: '2022-12-30' },
     { custorName: 'Jim Doe', dueDate: '2022-12-29' },
+    { custorName: 'Jim Doe', dueDate: '2022-12-29' },
+    { custorName: 'Jim Doe', dueDate: '2022-12-29' },
+    { custorName: 'Jim Doe', dueDate: '2022-12-29' },
+    { custorName: 'Jim Doe', dueDate: '2022-12-29' },
+    { custorName: 'Jim Doe', dueDate: '2022-12-29' },
+    { custorName: 'Jim Doe', dueDate: '2022-12-29' },
+    { custorName: 'Jim Doe', dueDate: '2022-12-29' },
+    { custorName: 'Jim Doe', dueDate: '2022-12-29' },
+    { custorName: 'Jim Doe', dueDate: '2022-12-29' },
+    { custorName: 'Jim Doe', dueDate: '2022-12-29' },
+    { custorName: 'Jim Doe', dueDate: '2022-12-29' },
+    { custorName: 'Jim Doe', dueDate: '2022-12-29' },
+    { custorName: 'Jim Doe', dueDate: '2022-12-29' },
 ]);
 
 </script>
+
