@@ -1,16 +1,16 @@
 <template>
     <h5 class="mb-5 text-xl font-bold">Upcoming Due</h5>
     <div class="flex flex-row gap-5">
-        <Alert v-for="(list, index) in upComingDueList" :key="index" class="mb-5 w-64">
+        <Alert v-for="(dueList, index) in upComingDueList" :key="index" class="mb-5 w-64">
             <ReceiptText class="h-4 w-4" />
-            <AlertTitle>{{ list.custorName }}</AlertTitle>
+            <AlertTitle>{{ dueList.custorName }}</AlertTitle>
             <AlertDescription>
-                {{ list.dueDate }}
+                {{ dueList.dueDate }}
             </AlertDescription>
         </Alert>
     </div>
     <div class="card rounded bg-gray-50 dark:bg-gray-700 mt-2">
-        <div class="p-4 flex flex-row justify-between items-center">
+        <div class="p-4 flex flex-row justify-between items-center">    
             <div class="flex gap-2 items-center p-2 rounded w-1/2 sm:1/3"
                 style="background-color: rgba(255, 255, 255, 0.299);">
                 <span class="material-symbols-outlined">
