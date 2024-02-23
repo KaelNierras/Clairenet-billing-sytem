@@ -121,7 +121,7 @@ onMounted(() => {
                </a> -->
 
                <router-link :to="{ path: '/dashboard' }"
-                  class="flex items-center p-2 rounded-lg hover:bg-accent group">
+                  class="flex items-center p-2 rounded-lg group">
                   <h4 class="text-2xl sm:text-3xl font-bold">Clairenet Billing System</h4>
                </router-link>
 
