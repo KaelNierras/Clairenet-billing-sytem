@@ -57,7 +57,7 @@
                         <th scope="col" class="px-6 py-3">
                             <div class="flex flex-row items-center gap-3">
                                 Customer name
-                                <span class="material-symbols-outlined hover:cursor-pointer text-xl hover:text-accent"
+                                <span class="material-symbols-outlined hover:cursor-pointer text-xl hover:text-muted-foreground"
                                     @click="sort('customerName')">
                                     swap_vert
                                 </span>
@@ -66,7 +66,7 @@
                         <th scope="col" class="px-6 py-3 ">
                             <div class="flex flex-row items-center gap-3">
                                 Email
-                                <span class="material-symbols-outlined hover:cursor-pointer text-xl hover:text-accent"
+                                <span class="material-symbols-outlined hover:cursor-pointer text-xl hover:text-muted-foreground"
                                     @click="sort('email')">
                                     swap_vert
                                 </span>
@@ -75,7 +75,7 @@
                         <th scope="col" class="px-6 py-3">
                             <div class="flex flex-row items-center gap-3">
                                 Phone
-                                <span class="material-symbols-outlined hover:cursor-pointer text-xl hover:text-accent"
+                                <span class="material-symbols-outlined hover:cursor-pointer text-xl hover:text-muted-foreground"
                                     @click="sort('phone')">
                                     swap_vert
                                 </span>
@@ -84,7 +84,7 @@
                         <th scope="col" class="px-6 py-3 ">
                             <div class="flex flex-row items-center gap-3">
                                 Registered Date
-                                <span class="material-symbols-outlined hover:cursor-pointer text-xl hover:text-accent"
+                                <span class="material-symbols-outlined hover:cursor-pointer text-xl hover:text-muted-foreground"
                                     @click="sort('registeredDate')">
                                     swap_vert
                                 </span>
