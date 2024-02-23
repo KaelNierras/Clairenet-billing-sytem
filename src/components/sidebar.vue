@@ -101,7 +101,7 @@ onMounted(() => {
 
 <template>
    <!-- Top Bar -->
-   <nav class="fixed top-0 z-50 w-full border bg-background">
+   <nav class="fixed top-0 z-50 w-full border-b-2 bg-background">
       <div class="px-3 sm:px-1 py-3 lg:px-10 lg:pl-3">
          <div class="flex items-center justify-between">
             <div class="flex items-center justify-start rtl:justify-end">
