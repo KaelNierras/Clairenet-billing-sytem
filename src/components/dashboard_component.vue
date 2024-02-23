@@ -28,7 +28,7 @@
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent class="w-56">
-                        <DropdownMenuLabel>Filter status</DropdownMenuLabel>
+                        <DropdownMenuLabel>Filter by</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuGroup>
                             <DropdownMenuItem @click="updateSearch('Paid')">
