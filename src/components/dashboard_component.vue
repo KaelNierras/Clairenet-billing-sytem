@@ -11,7 +11,7 @@
         <button v-if="upComingDueList.length > limit" @click="seeAll" class="btn btn-primary justify-center item-center flex md:flex-col flex-row"><ChevronRightSquare /></button>
         <button v-if="limit > 3" @click="seeLess" class="btn btn-primary justify-center item-center flex md:flex-col flex-row"><ChevronLeftSquare /></button>
     </div>
-    <div class="card rounded border text-foreground mt-2">
+    <div class="card rounded border bg-secondary text-foreground mt-2">
         <div class="p-4 flex flex-row justify-between items-center">    
             <div class="flex gap-2 items-center p-2 rounded w-1/2 sm:1/3"
                 >
