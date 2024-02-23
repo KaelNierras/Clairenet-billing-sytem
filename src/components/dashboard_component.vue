@@ -1,7 +1,7 @@
 <template>
     <h5 class="mb-5 text-xl font-bold">Upcoming Due</h5>
     <div class="flex flex-col gap-3 overflow-y-auto md:flex-row mb-5">
-        <Alert v-for="(dueList, index) in limitedUpComingDueList" :key="index" class="w-auto md:min-w-56 bg-secondary">
+        <Alert v-for="(dueList, index) in limitedUpComingDueList" :key="index" class="w-auto md:min-w-56 bg-card">
             <ReceiptText class="h-4 w-4" />
             <AlertTitle>{{ dueList.custorName }}</AlertTitle>
             <AlertDescription>
@@ -11,7 +11,7 @@
         <button v-if="upComingDueList.length > limit" @click="seeAll" class="btn btn-primary justify-center item-center flex md:flex-col flex-row"><ChevronRightSquare /></button>
         <button v-if="limit > 3" @click="seeLess" class="btn btn-primary justify-center item-center flex md:flex-col flex-row"><ChevronLeftSquare /></button>
     </div>
-    <div class="card rounded border bg-secondary text-foreground mt-2">
+    <div class="card rounded border bg-card text-foreground mt-2">
         <div class="p-4 flex flex-row justify-between items-center">    
             <div class="flex gap-2 items-center p-2 rounded w-1/2 sm:1/3"
                 >

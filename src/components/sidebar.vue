@@ -122,7 +122,7 @@ onMounted(() => {
 
                <router-link :to="{ path: '/dashboard' }"
                   class="flex items-center p-2 rounded-lg group">
-                  <h4 class="text-2xl sm:text-3xl font-bold">Clairenet Billing System</h4>
+                  <h4 class=" text-xl sm:text-3xl font-bold">Clairenet Billing System</h4>
                </router-link>
 
             </div>
@@ -152,7 +152,7 @@ onMounted(() => {
 
    <!-- Sidebar -->
    <aside id="logo-sidebar"
-      class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full sm:translate-x-0"
+      class="fixed bg-background mt-5 sm:mt-0 top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full sm:translate-x-0"
       aria-label="Sidebar">
       <div
          class="h-full px-3 pb-4 overflow-y-auto border d-flex flex-column justify-content-between">
