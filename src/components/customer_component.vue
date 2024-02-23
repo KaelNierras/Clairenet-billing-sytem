@@ -12,7 +12,7 @@
                     <DropdownMenuTrigger as-child>
                         <Button variant="default">
                             <span class="material-symbols-outlined">
-                                filter_alt
+                                filter_list
                             </span>
                         </Button>
                     </DropdownMenuTrigger>
