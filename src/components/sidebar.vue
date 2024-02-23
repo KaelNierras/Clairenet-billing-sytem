@@ -101,7 +101,7 @@ onMounted(() => {
 
 <template>
    <!-- Top Bar -->
-   <nav class="fixed top-0 z-50 w-full border">
+   <nav class="fixed top-0 z-50 w-full border bg-background">
       <div class="px-3 sm:px-1 py-3 lg:px-10 lg:pl-3">
          <div class="flex items-center justify-between">
             <div class="flex items-center justify-start rtl:justify-end">
@@ -155,7 +155,7 @@ onMounted(() => {
       class="fixed bg-background mt-5 sm:mt-0 top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full sm:translate-x-0"
       aria-label="Sidebar">
       <div
-         class="h-full px-3 pb-4 overflow-y-auto border d-flex flex-column justify-content-between">
+         class="h-full px-3 pb-4 overflow-y-auto border-r-2 d-flex flex-column justify-content-between">
          <!-- <div class="flex flow-row justify-Start ml-2 items-center mt-12 sm:mt-2">
             <img :src="photoURL" class="w-8 h-8 rounded-full mr-2" alt="Profile Picture" /> 
             <div class="flex flex-col justify-center items-start">
