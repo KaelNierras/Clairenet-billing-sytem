@@ -128,8 +128,8 @@ onMounted(() => {
             </div>
             <div class="flex items-center">
 
-               <div class="flex items-center ms-3 gap-7">
-                  <Button variant="ghost" size="sm" class="mr-0" @click="toggleDarkMode">
+               <div class="flex items-center ms-3 gap-2">
+                  <Button variant="ghost" size="sm" class="mr-0 hover:bg-accent p-2 rounded w-12 h-12" @click="toggleDarkMode">
                      <span class="material-symbols-outlined" v-if="darkMode">
                         light_mode
                      </span>
@@ -137,7 +137,7 @@ onMounted(() => {
                         dark_mode
                      </span>
                   </Button>
-                  <Button variant="ghost" size="sm" class="mr-4" @click="signOut">
+                  <Button variant="ghost" size="sm" class="mr-4 hover:bg-accent p-2 rounded w-12 h-12" @click="signOut">
                      <span class="material-symbols-outlined">
                         <span class="material-symbols-outlined">
                            logout
