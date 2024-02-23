@@ -247,14 +247,17 @@
                                             </DialogDescription>
                                         </DialogHeader>
                                         <DialogFooter>
-                                            <Button variant="default" @click="updateStatus(customer.customerName, 'Paid')"
+                                            <div class="flex gap-4 flex-col md:flex-row">
+                                                <Button variant="default" @click="updateStatus(customer.customerName, 'Paid')"
                                                 type="submit">
-                                                Make as Paid
+                                                Make as paid
                                             </Button>
                                             <Button variant="destructive"
                                                 @click="updateStatus(customer.customerName, 'Unpaid')" type="submit">
-                                                Make as Unpaid
+                                                Make as unpaid
                                             </Button>
+                                            </div>
+                                            
                                         </DialogFooter>
                                     </DialogContent>
                                 </Dialog>
