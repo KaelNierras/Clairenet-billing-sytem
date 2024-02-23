@@ -1,11 +1,11 @@
 <template>
-    <h5 class="mb-5 font-bold">Upcoming Due</h5>
+    <h5 class="mb-5 text-xl font-bold">Upcoming Due</h5>
     <div class="flex flex-row gap-5">
         <Alert v-for="(list, index) in upComingDueList" :key="index" class="mb-5 w-64">
             <ReceiptText class="h-4 w-4" />
             <AlertTitle>{{ list.name }}</AlertTitle>
             <AlertDescription>
-                {{ list.date }}
+                {{ list.dueDate }}
             </AlertDescription>
         </Alert>
     </div>
@@ -368,9 +368,9 @@ const products = ref<Customer[]>([
 ]);
 
 const upComingDueList = ref([
-    { name: 'John Doe', date: '2022-12-31' },
-    { name: 'Jane Doe', date: '2022-12-30' },
-    { name: 'Jim Doe', date: '2022-12-29' },
+    { name: 'John Doe', dueDate: '2022-12-31' },
+    { name: 'Jane Doe', dueDate: '2022-12-30' },
+    { name: 'Jim Doe', dueDate: '2022-12-29' },
 ]);
 
 const sortKey = ref<keyof Customer | ''>('');
