@@ -12,8 +12,8 @@
         <button v-if="limit > 3" @click="seeLess" class="btn btn-primary justify-center item-center flex md:flex-col flex-row"><ChevronLeftSquare /></button>
     </div>
     <div class="card rounded border bg-card text-foreground mt-2">
-        <div class="p-4 flex flex-row justify-between items-center">    
-            <div class="flex gap-2 items-center p-2 rounded bg-accent/30 w-1/2 sm:1/3"
+        <div class="p-4 flex flex-row justify-between items-center bg-accent">    
+            <div class="flex gap-2 items-center p-2 rounded bg-background/30 w-1/2 sm:1/3"
                 >
                 <span class="material-symbols-outlined">
                     search
@@ -156,9 +156,9 @@
                 </DialogContent>
             </Dialog>
         </div>
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div class="relative overflow-x-auto shadow-md">
             <table class="w-full text-sm text-left rtl:text-right">
-                <thead class=" text- uppercase">
+                <thead class=" text-uppercase bg-accent">
                     <tr>
                         <th scope="col" class="px-6 py-3">
                             <div class="flex flex-row items-center gap-3">
