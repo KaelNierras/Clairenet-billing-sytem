@@ -1,7 +1,7 @@
 <template>
     <h5 class="mb-5 text-xl font-bold">Upcoming Due</h5>
     <div class="flex flex-col gap-3 overflow-y-auto md:flex-row mb-5">
-        <Alert v-for="(dueList, index) in limitedUpComingDueList" :key="index" class="w-auto md:min-w-56">
+        <Alert v-for="(dueList, index) in limitedUpComingDueList" :key="index" class="w-auto md:min-w-56 bg-secondary">
             <ReceiptText class="h-4 w-4" />
             <AlertTitle>{{ dueList.custorName }}</AlertTitle>
             <AlertDescription>
