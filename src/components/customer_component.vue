@@ -98,7 +98,7 @@
                 </thead>
                 <tbody>
                     <tr v-for="(customer, index) in filteredCustomers" :key="index"
-                        class="border-b ">
+                        class="border-b bg-accent/40">
                         <th scope="row" class="px-6 py-4 font-medium  whitespace-nowrap">
                             {{ customer.customerName }}
                         </th>

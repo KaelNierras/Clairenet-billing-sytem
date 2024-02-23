@@ -161,7 +161,7 @@
                 <thead class=" text-uppercase bg-accent">
                     <tr>
                         <th scope="col" class="px-6 py-3">
-                            <div class="flex flex-row items-center gap-3">
+                            <div class="flex flex-row items-center gap-3 ">
                                 Customer name
                                 <span class="material-symbols-outlined hover:cursor-pointer text-xl hover:text-accent"
                                     @click="sort('customerName')">
@@ -215,7 +215,7 @@
                 </thead>
                 <tbody>
                     <tr v-for="(customer, index) in filteredCustomer" :key="index"
-                        class="border-b ">
+                        class="border-b bg-accent/40">
                         <th scope="row" class="px-6 py-4 font-medium  whitespace-nowrap">
                             {{ customer.customerName }}
                         </th>
