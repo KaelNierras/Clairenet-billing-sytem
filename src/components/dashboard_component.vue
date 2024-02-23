@@ -55,7 +55,7 @@
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent class="w-56">
-                        <DropdownMenuLabel>Filter categories</DropdownMenuLabel>
+                        <DropdownMenuLabel>Filter by</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuGroup>
                             <DropdownMenuItem @click="handleClick('customerName')">
