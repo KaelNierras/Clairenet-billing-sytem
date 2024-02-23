@@ -52,7 +52,7 @@
         </div>
         <div class="relative overflow-x-auto shadow-md">
             <table class="w-full text-sm text-left rtl:text-right">
-                <thead class="text- uppercase bg-accent">
+                <thead class="text-uppercase bg-accent">
                     <tr>
                         <th scope="col" class="px-6 py-3">
                             <div class="flex flex-row items-center gap-3">
