@@ -9,8 +9,10 @@ const router = useRouter();
 const email = ref(localStorage.getItem('rememberMe') || '');
 const password = ref('');
 const rememberMe = ref(localStorage.getItem('rememberMe') ? true : false);
+const loading = ref(false); // Add this line
 
 const signInWithEmail = async (email: string, password: string) => {
+  loading.value = true; // Add this line
   try {
     await signInWithEmailAndPassword(auth, email, password);
     if (rememberMe.value) {
@@ -22,6 +24,8 @@ const signInWithEmail = async (email: string, password: string) => {
     router.push('/dashboard');
   } catch (error: any) {
     window.alert(error.message);
+  } finally {
+    loading.value = false; // Add this line
   }
 };
 
@@ -99,8 +103,9 @@ onMounted(() => {
         <!-- <a href="#" class="ms-auto text-sm text-blue-700 hover:underline dark:text-blue-500">Lost Password?</a> -->
       </div>
       <button type="submit"
-        class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login
-        to your account</button>
+        class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        <span v-if="loading">Loading...</span> <!-- Add this line -->
+        <span v-else>Login to your account</span></button>
       <!-- <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
             Not registered? <a href="#" class="text-blue-700 hover:underline dark:text-blue-500">Create account</a>
         </div> -->
