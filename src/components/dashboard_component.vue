@@ -11,19 +11,19 @@
         <button v-if="upComingDueList.length > limit" @click="seeAll" class="btn btn-primary justify-center item-center flex md:flex-col flex-row"><ChevronRightSquare /></button>
         <button v-if="limit > 3" @click="seeLess" class="btn btn-primary justify-center item-center flex md:flex-col flex-row"><ChevronLeftSquare /></button>
     </div>
-    <div class="card rounded bg-gray-50 dark:bg-gray-700 mt-2">
+    <div class="card rounded border text-foreground mt-2">
         <div class="p-4 flex flex-row justify-between items-center">    
             <div class="flex gap-2 items-center p-2 rounded w-1/2 sm:1/3"
-                style="background-color: rgba(255, 255, 255, 0.299);">
+                >
                 <span class="material-symbols-outlined">
                     search
                 </span>
                 <input v-model="search" type="text" :placeholder="'Search ' + textConverter(filterChoice)"
-                    class="w-full px-3 py-2 text-sm leading-tight dark:text-white text-gray-700 bg-transparent rounded appearance-none focus:outline-none focus:shadow-outline"
+                    class="w-full px-3 py-2 text-sm leading-tight bg-transparent rounded appearance-none focus:outline-none focus:shadow-outline"
                     :disabled="filterChoice === 'status'" />
                 <DropdownMenu v-if="filterChoice == 'status'">
                     <DropdownMenuTrigger as-child>
-                        <Button variant="success">
+                        <Button variant="secondary">
                             Status
                         </Button>
                     </DropdownMenuTrigger>
@@ -48,7 +48,7 @@
                 </DropdownMenu>
                 <DropdownMenu>
                     <DropdownMenuTrigger as-child>
-                        <Button variant="outline">
+                        <Button variant="default">
                             <span class="material-symbols-outlined">
                                 filter_alt
                             </span>
@@ -88,7 +88,7 @@
             </div>
             <Dialog>
                 <DialogTrigger as-child>
-                    <Button variant="outline">
+                    <Button variant="default">
                         Add payable
                     </Button>
                 </DialogTrigger>
@@ -149,7 +149,7 @@
                         </div>
                     </div>
                     <DialogFooter>
-                        <Button type="submit" @click="addPayable()">
+                        <Button variance="secondary" type="submit" @click="addPayable()">
                             Add
                         </Button>
                     </DialogFooter>
@@ -157,13 +157,13 @@
             </Dialog>
         </div>
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead class=" text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <table class="w-full text-sm text-left rtl:text-right">
+                <thead class=" text- uppercase">
                     <tr>
                         <th scope="col" class="px-6 py-3">
                             <div class="flex flex-row items-center gap-3">
                                 Customer name
-                                <span class="material-symbols-outlined hover:cursor-pointer text-xl hover:text-blue-500"
+                                <span class="material-symbols-outlined hover:cursor-pointer text-xl hover:text-accent"
                                     @click="sort('customerName')">
                                     swap_vert
                                 </span>
@@ -172,7 +172,7 @@
                         <th scope="col" class="px-6 py-3 ">
                             <div class="flex flex-row items-center gap-3">
                                 Address
-                                <span class="material-symbols-outlined hover:cursor-pointer text-xl hover:text-blue-500"
+                                <span class="material-symbols-outlined hover:cursor-pointer text-xl hover:text-accent"
                                     @click="sort('address')">
                                     swap_vert
                                 </span>
@@ -181,7 +181,7 @@
                         <th scope="col" class="px-6 py-3">
                             <div class="flex flex-row items-center gap-3">
                                 Due Date
-                                <span class="material-symbols-outlined hover:cursor-pointer text-xl hover:text-blue-500"
+                                <span class="material-symbols-outlined hover:cursor-pointer text-xl hover:text-accent"
                                     @click="sort('dueDate')">
                                     swap_vert
                                 </span>
@@ -190,7 +190,7 @@
                         <th scope="col" class="px-6 py-3 ">
                             <div class="flex flex-row items-center gap-3">
                                 Bill
-                                <span class="material-symbols-outlined hover:cursor-pointer text-xl hover:text-blue-500"
+                                <span class="material-symbols-outlined hover:cursor-pointer text-xl hover:text-accent"
                                     @click="sort('bill')">
                                     swap_vert
                                 </span>
@@ -200,7 +200,7 @@
                             <div class="flex flex-row items-center gap-3">
                                 <div class="flex flex-row items-center gap-3">
                                     Status
-                                    <span class="material-symbols-outlined hover:cursor-pointer text-xl hover:text-blue-500"
+                                    <span class="material-symbols-outlined hover:cursor-pointer text-xl hover:text-accent"
                                         @click="sort('status')">
                                         swap_vert
                                     </span>
@@ -215,8 +215,8 @@
                 </thead>
                 <tbody>
                     <tr v-for="(customer, index) in filteredCustomer" :key="index"
-                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        class="border-b ">
+                        <th scope="row" class="px-6 py-4 font-medium  whitespace-nowrap">
                             {{ customer.customerName }}
                         </th>
                         <td class="px-6 py-4">
@@ -235,7 +235,7 @@
                             <div class="flex gap-4">
                                 <Dialog>
                                     <DialogTrigger as-child>
-                                        <Button variant="success">
+                                        <Button variant="default">
                                             <SquarePen />
                                         </Button>
                                     </DialogTrigger>
@@ -247,7 +247,7 @@
                                             </DialogDescription>
                                         </DialogHeader>
                                         <DialogFooter>
-                                            <Button variant="success" @click="updateStatus(customer.customerName, 'Paid')"
+                                            <Button variant="default" @click="updateStatus(customer.customerName, 'Paid')"
                                                 type="submit">
                                                 Make as Paid
                                             </Button>

@@ -101,13 +101,13 @@ onMounted(() => {
 
 <template>
    <!-- Top Bar -->
-   <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+   <nav class="fixed top-0 z-50 w-full border">
       <div class="px-3 sm:px-1 py-3 lg:px-10 lg:pl-3">
          <div class="flex items-center justify-between">
             <div class="flex items-center justify-start rtl:justify-end">
                <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar"
                   type="button"
-                  class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+                  class="inline-flex items-center p-2 text-s rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
                   <span class="sr-only">Open sidebar</span>
                   <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                      xmlns="http://www.w3.org/2000/svg">
@@ -121,7 +121,7 @@ onMounted(() => {
                </a> -->
 
                <router-link :to="{ path: '/dashboard' }"
-                  class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700 group">
+                  class="flex items-center p-2 rounded-lg hover:bg-accent group">
                   <h4 class="text-2xl sm:text-3xl font-bold">Clairenet Billing System</h4>
                </router-link>
 
@@ -152,10 +152,10 @@ onMounted(() => {
 
    <!-- Sidebar -->
    <aside id="logo-sidebar"
-      class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-slate-100 border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+      class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full sm:translate-x-0"
       aria-label="Sidebar">
       <div
-         class="h-full px-3 pb-4 overflow-y-auto bg-slate-100 dark:bg-gray-800 d-flex flex-column justify-content-between">
+         class="h-full px-3 pb-4 overflow-y-auto border d-flex flex-column justify-content-between">
          <!-- <div class="flex flow-row justify-Start ml-2 items-center mt-12 sm:mt-2">
             <img :src="photoURL" class="w-8 h-8 rounded-full mr-2" alt="Profile Picture" /> 
             <div class="flex flex-col justify-center items-start">
@@ -167,11 +167,11 @@ onMounted(() => {
          <ul class="space-y-2 font-medium mt-2 sm:mt-2">
             <li>
                <router-link :to="{ path: '/dashboard' }"
-                  :class="{ 'bg-gray-700': darkMode && isActive('/dashboard'), 'bg-gray-300': !darkMode && isActive('/dashboard') }"
-                  class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700 group">
+                  :class="{ 'bg-accent': darkMode && isActive('/dashboard'), 'bg-accent/90': !darkMode && isActive('/dashboard') }"
+                  class="flex items-center p-2 rounded-lg  hover:bg-accent dark:hover:bg-accent group">
                   <span
-                     :class="{ 'text-gray-900': darkMode && isActive('/dashboard'), 'text-gray-500': !darkMode && isActive('/dashboard') }"
-                     class="material-symbols-outlined flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                     :class="{ '': darkMode && isActive('/dashboard'), '': !darkMode && isActive('/dashboard') }"
+                     class="material-symbols-outlined flex-shrink-0 w-5 h-5 transition duration-75  group-hover:accent dark:group-hover:accent"
                      aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
                      dashboard_customize
                   </span>
@@ -181,11 +181,11 @@ onMounted(() => {
             </li>
             <li>
                <router-link :to="{ path: '/customer' }"
-                  :class="{ 'bg-gray-700': darkMode && isActive('/customer'), 'bg-gray-300': !darkMode && isActive('/customer') }"
-                  class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700 group">
+               :class="{ 'bg-accent': darkMode && isActive('/customer'), 'bg-accent/90': !darkMode && isActive('/customer') }"
+               class="flex items-center p-2 rounded-lg  hover:bg-accent dark:hover:bg-accent group">
                   <span
-                     :class="{ 'text-gray-900': darkMode && isActive('/customer'), 'text-gray-500': !darkMode && isActive('/customer') }"
-                     class="material-symbols-outlined flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                  :class="{ '': darkMode && isActive('/dashboard'), '': !darkMode && isActive('/dashboard') }"
+                  class="material-symbols-outlined flex-shrink-0 w-5 h-5 transition duration-75  group-hover:accent dark:group-hover:accent"
                      aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
                      <span class="material-symbols-outlined">
                         groups
@@ -195,8 +195,6 @@ onMounted(() => {
                </router-link>
             </li>
          </ul>
-
-
       </div>
 
    </aside>
