@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CustomerComponent from "../components/customer_component.vue";
+import CustomerComponent from "../components/customer/customer_component.vue";
 
 </script>
 
