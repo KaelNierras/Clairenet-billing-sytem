@@ -1,60 +1,14 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { auth } from '../firebase';
-import { signInWithEmailAndPassword } from 'firebase/auth'
-import { useRouter } from 'vue-router';
+import { onMounted } from 'vue';
+import { useLoginController } from '@/controllers/authentication/login_controller';
 
-const router = useRouter();
-
-const email = ref(localStorage.getItem('rememberMe') || '');
-const password = ref('');
-const rememberMe = ref(localStorage.getItem('rememberMe') ? true : false);
-const loading = ref(false); // Add this line
-
-const signInWithEmail = async (email: string, password: string) => {
-  loading.value = true; // Add this line
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-    if (rememberMe.value) {
-      localStorage.setItem('rememberMe', email);
-    } else {
-      localStorage.removeItem('rememberMe');
-    }
-    window.alert('You have successfully signed in');
-    router.push('/dashboard');
-  } catch (error: any) {
-    window.alert(error.message);
-  } finally {
-    loading.value = false; // Add this line
-  }
-};
-
-const darkMode = ref(getDarkMode());
-
-function getDarkMode() {
-  // Try to get the dark mode setting from localStorage
-  const storedDarkMode = localStorage.getItem('darkMode');
-
-  // If the setting exists, return it (converted to a boolean)
-  if (storedDarkMode !== null) {
-    return storedDarkMode === 'true';
-  }
-
-  // Otherwise, determine the setting based on the body class
-  const body = document.querySelector('body');
-  const isDark = body?.classList.contains('dark');
-  return isDark;
-}
-
-function toggleDarkMode() {
-  darkMode.value = !darkMode.value;
-
-  // Store the new setting in localStorage
-  localStorage.setItem('darkMode', darkMode.value.toString());
-
-  const body = document.querySelector('body');
-  body?.classList.toggle('dark', darkMode.value);
-}
+const {
+  userCredentials,
+  darkMode,
+  loading,
+  rememberMe,
+  toggleDarkMode,
+  signIn } = useLoginController();
 
 onMounted(() => {
   const body = document.querySelector('body');
@@ -75,18 +29,18 @@ onMounted(() => {
   </div>
   <div
     class="w-80 sm:w-96 p-8 bg-white border border-gray-200 rounded-lg shadow md:p-8 dark:bg-gray-800 dark:border-gray-700">
-    <form class="space-y-6" @submit.prevent="signInWithEmail(email, password)">
+    <form class="space-y-6" @submit.prevent="signIn()">
       <h5 class="text-xl font-medium text-gray-900 dark:text-white">Login to Clairenet Billing System</h5>
       <div>
         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-        <input v-model="email" type="email" name="email" id="email"
+        <input v-model="userCredentials.email" type="email" name="email" id="email"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
           placeholder="name@company.com" required />
       </div>
       <div>
         <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
           Password</label>
-        <input v-model="password" type="password" name="password" id="password" placeholder="••••••••"
+        <input v-model="userCredentials.password" type="password" name="password" id="password" placeholder="••••••••"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
           required />
       </div>
