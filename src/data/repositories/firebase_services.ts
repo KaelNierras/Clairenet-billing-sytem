@@ -34,7 +34,7 @@ export const addUserData = async (user: Customer) => {
             customerName: user.customerName,
             address: user.address,
             createdDate: user.createdDate,
-            status: 'Active',
+            status: user.status,
         });
         console.log('User data added successfully!');
     } catch (error) {
