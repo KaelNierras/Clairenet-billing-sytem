@@ -121,4 +121,3 @@ const {
     addCustomer } = useAddCustomerController()
 
 </script>
-../../../controllers/customer/add_customer_controller
