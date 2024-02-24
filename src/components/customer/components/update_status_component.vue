@@ -13,14 +13,17 @@
                 </DialogDescription>
             </DialogHeader>
             <DialogFooter>
-                <div class="flex gap-4 flex-col md:flex-row">
-                    <Button variant="default" @click="updateStatus('Active')" type="submit">
-                        Mark as active
-                    </Button>
-                    <Button variant="destructive" @click="updateStatus('Not active')" type="submit">
-                        Mark as not active
-                    </Button>
-                </div>
+                <DialogClose as-child>
+                    <div class="flex gap-4 flex-col md:flex-row">
+                        <Button variant="default" @click="updateStatus(props.customerName, 'Active')" type="submit">
+                            Mark as active
+                        </Button>
+                        <Button variant="destructive" @click="updateStatus(props.customerName, 'Not active')" type="submit">
+                            Mark as not active
+                        </Button>
+                    </div>
+                </DialogClose>
+
 
             </DialogFooter>
         </DialogContent>
@@ -40,7 +43,12 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
+    DialogClose,
 } from '@/components/ui/dialog'
+
+import { useUpdateStatusController } from '@/controllers/customer/update_status_controller'
+
+const { updateStatus } = useUpdateStatusController();
 
 //Props
 const props = defineProps({
@@ -49,10 +57,7 @@ const props = defineProps({
         default: '' // Provide a default value
     }
 })
-const updateStatus = (status: string) => {
-    if (props.customerName) { // Check if customerName is defined
-        console.log(props.customerName, 'is', status);
-    }
-};
+
+
 
 </script>
