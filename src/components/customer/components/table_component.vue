@@ -139,7 +139,7 @@
                     </td>
                     <td class="px-6 py-4 text-left">
                         <div class="flex gap-4">
-                            <updateStatusComponent :customerName="customer.customerName" />
+                            <updateStatusComponent :customerName="customer.customerName" :status="customer.status" />
                         </div>
                     </td>
                 </tr>

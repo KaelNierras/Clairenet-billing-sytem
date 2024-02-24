@@ -1,4 +1,7 @@
-import { updateCustomerStatus } from "@/data/repositories/firebase_services";
+import { useToast } from '@/components/ui/toast/use-toast'
+
+const { toast } = useToast()
+import { updateCustomerStatus, deleteCustomer } from "@/data/repositories/firebase_services";
 import { fetchCustomers } from "./table_dashboard_controller";
 
 
@@ -7,13 +10,29 @@ export function useUpdateStatusController() {
         try {
             await updateCustomerStatus(customerName, status);
             fetchCustomers();
-            window.alert('User status updated successfully');
+            toast({
+                title: 'User status updated successfully',
+            });
         } catch (error) {
             window.alert(`Error updating user status:', ${error}`);
         }
     };
 
+    const deleteSelectedCustomer = async (customerName: string) => {
+        try {
+            await deleteCustomer(customerName);
+            fetchCustomers();
+            toast({
+                title: 'Customer successfully deleted',
+            });
+            window.alert('');
+        } catch (error) {
+            window.alert(`Error in deleting customer:', ${error}`);
+        }
+    };
+
     return {
+        deleteSelectedCustomer,
         updateStatus,
     };
 }

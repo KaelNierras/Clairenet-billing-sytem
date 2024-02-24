@@ -1,7 +1,17 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import { getFirestore, collection, addDoc, getDocs, query, where, updateDoc, doc } from 'firebase/firestore';
+import {
+	getFirestore,
+	collection,
+	addDoc,
+	getDocs,
+	query,
+	where,
+	updateDoc,
+	doc,
+  deleteDoc
+} from 'firebase/firestore';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { Customer } from '@/models/customer/customer_model';
 import { UserCredentials } from '@/models/authentication/login_model';
@@ -56,6 +66,21 @@ export const updateCustomerStatus = async (customerName: string, newStatus: stri
 		}
 		const docId = querySnapshot.docs[0].id;
 		await updateDoc(doc(db, 'customers', docId), { status: newStatus });
+	} catch (error) {
+		throw error;
+	}
+};
+
+export const deleteCustomer = async (customerName: string) => {
+	try {
+		const customersRef = collection(db, 'customers');
+		const q = query(customersRef, where('customerName', '==', customerName));
+		const querySnapshot = await getDocs(q);
+		if (querySnapshot.empty) {
+			throw new Error('No customer found with this name.');
+		}
+		const docId = querySnapshot.docs[0].id;
+		await deleteDoc(doc(db, 'customers', docId));
 	} catch (error) {
 		throw error;
 	}
