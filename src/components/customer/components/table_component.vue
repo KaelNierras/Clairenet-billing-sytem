@@ -166,7 +166,8 @@ import updateStatusComponent from './update_status_component.vue';
 import { useTableDashboardController } from '../../../controllers/customer/table_dashboard_controller';
 
 onMounted(() => {
-    initFlowbite()
+    initFlowbite(),
+    fetchCustomers()
 });
 
 const {
@@ -176,6 +177,7 @@ const {
     handleClick,
     textConverter,
     sort,
-    filteredCustomer
+    filteredCustomer,
+    fetchCustomers
 } = useTableDashboardController();
 </script>

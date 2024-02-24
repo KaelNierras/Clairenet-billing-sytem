@@ -77,9 +77,11 @@
                 </div>
             </div>
             <DialogFooter>
-                <Button variance="secondary" type="submit" @click="addPayable()">
-                    Add
-                </Button>
+                <DialogClose as-child>
+                    <Button variance="secondary" type="submit" @click="addCustomer()">
+                      Add
+                     </Button>
+                </DialogClose>
             </DialogFooter>
         </DialogContent>
     </Dialog>
@@ -96,6 +98,7 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
+    DialogClose,
 } from '@/components/ui/dialog'
 import {
     Select,
@@ -107,7 +110,7 @@ import {
     SelectValue,
 } from '@/components/ui/select'
 import { Label } from '@/components/ui/label'
-import { useAddPayableController } from '../../../controllers/customer/add_payable_controller'
+import {useAddCustomerController} from '../../../controllers/customer/add_customer_controller'
 import { municipalities, navalBarangay, calubianBarangay } from '../../../models/customer/add_customer_model'
 
 
@@ -115,6 +118,7 @@ const {
     customerName,
     selectedBarangay,
     selectedMunicipality,
-    addPayable } = useAddPayableController()
+    addCustomer } = useAddCustomerController()
 
 </script>
+../../../controllers/customer/add_customer_controller

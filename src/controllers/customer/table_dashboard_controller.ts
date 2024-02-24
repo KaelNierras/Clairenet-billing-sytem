@@ -1,6 +1,16 @@
 import { ref, reactive, computed } from 'vue';
-import { Customer, SortOrders, customers } from '@/models/customer/table_model';
+import { SortOrders, customers } from '@/models/customer/table_model';
+import { Customer } from '@/models/customer/customer_model';
+import { getCustomers } from '@/data/repositories/firebase_services';
 
+export const fetchCustomers = async () => {
+    try {
+        const customerData = await getCustomers();
+        customers.value = customerData as Customer[];
+    } catch (error) {
+        console.error('Error fetching customers:', error);
+    }
+};
 
 export function useTableDashboardController() {
     const search = ref('');
@@ -72,6 +82,7 @@ export function useTableDashboardController() {
         handleClick,
         textConverter,
         sort,
-        filteredCustomer
+        filteredCustomer,
+        fetchCustomers
     };
 }

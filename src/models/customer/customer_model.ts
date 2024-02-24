@@ -1,7 +1,7 @@
 export type Customer = {
     customerName: string;
     address: string;
-    createdDate: Date;
+    createdDate: string;
     status: string;
-    // Add other user properties as needed
+    [key: string]: string;
 };
