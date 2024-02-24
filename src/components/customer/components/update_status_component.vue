@@ -15,10 +15,10 @@
             <DialogFooter>
                 <DialogClose as-child>
                     <div class="flex gap-4 flex-col md:flex-row">
-                        <Button variant="default" @click="updateStatus(props.customerName, 'Active')" type="submit">
+                        <Button v-if="props.status == 'Not active'" variant="default" @click="updateStatus(props.customerName, 'Active')" type="submit">
                             Mark as active
                         </Button>
-                        <Button variant="destructive" @click="updateStatus(props.customerName, 'Not active')" type="submit">
+                        <Button v-if="props.status == 'Active'" variant="destructive" @click="updateStatus(props.customerName, 'Not active')" type="submit">
                             Mark as not active
                         </Button>
                     </div>
@@ -53,6 +53,10 @@ const { updateStatus } = useUpdateStatusController();
 //Props
 const props = defineProps({
     customerName: {
+        type: String,
+        default: '' // Provide a default value
+    },
+    status: {
         type: String,
         default: '' // Provide a default value
     }
