@@ -14,8 +14,8 @@ onMounted(() => {
   const body = document.querySelector('body');
   body?.classList.toggle('dark', darkMode.value);
 });
-
 </script>
+
 <template>
   <div class="flex items-end justify-end ms-3">
     <Button variant="ghost" size="sm" class="mr-0" @click="toggleDarkMode">
