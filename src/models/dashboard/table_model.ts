@@ -1,5 +1,3 @@
-import { ref } from "vue";
-
 export type CustomerPayable = {
     customerName: string;
     address: string;
@@ -12,5 +10,3 @@ export type CustomerPayable = {
 export type SortOrders = {
     [K in keyof CustomerPayable]?: number;
 };
-
-export const customersPayable = ref<CustomerPayable[]>([]);
