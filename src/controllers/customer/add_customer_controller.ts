@@ -10,6 +10,11 @@ export function useAddCustomerController() {
     const selectedBarangay = ref('');
 
     const addCustomer = async () => {
+        if (!customerName.value || !selectedMunicipality.value || !selectedBarangay.value) {
+            window.alert('All fields are required.');
+            return;
+        }
+    
         const customer = {
             customerName: customerName.value,
             address: `${selectedBarangay.value}, ${selectedMunicipality.value}`,

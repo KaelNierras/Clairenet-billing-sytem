@@ -28,6 +28,11 @@ export function useAddPayableController() {
     }
 
     const addPayableData = async () => {
+        if (!customerName.value || !bill.value || !date.value) {
+            window.alert('All fields are required.');
+            return;
+        }
+    
         await fetchAddress();
         const CustomerPayable = {
             customerName: customerName.value,
