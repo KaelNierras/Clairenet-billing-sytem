@@ -147,7 +147,7 @@
                         {{ customer.status }}
                     </td>
                     <td class="px-6 py-4">
-                        {{ customer.bill }}
+                        {{ '₱ ' + Number(customer.bill).toLocaleString() }}
                     </td>
                     <td class="px-6 py-4 text-left">
                         <updateStatusComponent :customerName="customer.customerName" :status="customer.status"/>
