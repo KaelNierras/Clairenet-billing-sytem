@@ -105,15 +105,6 @@
                             </span>
                         </div>
                     </th>
-                    <th scope="col" class="px-6 py-3 ">
-                        <div class="flex flex-row items-center gap-3">
-                            Bill
-                            <!-- <span class="material-symbols-outlined hover:cursor-pointer text-xl hover:text-muted-foreground"
-                                @click="sort('bill')">
-                                swap_vert
-                            </span> -->
-                        </div>
-                    </th>
                     <th scope="col" class="px-6 py-3">
                         <div class="flex flex-row items-center gap-3">
                             <div class="flex flex-row items-center gap-3">
@@ -124,6 +115,15 @@
                                     swap_vert
                                 </span>
                             </div>
+                        </div>
+                    </th>
+                    <th scope="col" class="px-6 py-3 ">
+                        <div class="flex flex-row items-center gap-3">
+                            Bill
+                            <!-- <span class="material-symbols-outlined hover:cursor-pointer text-xl hover:text-muted-foreground"
+                                @click="sort('bill')">
+                                swap_vert
+                            </span> -->
                         </div>
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -144,10 +144,10 @@
                         {{ customer.dueDate }}
                     </td>
                     <td class="px-6 py-4">
-                        {{ customer.bill }}
+                        {{ customer.status }}
                     </td>
                     <td class="px-6 py-4">
-                        {{ customer.status }}
+                        {{ customer.bill }}
                     </td>
                     <td class="px-6 py-4 text-left">
                         <updateStatusComponent :customerName="customer.customerName" :status="customer.status"/>
