@@ -13,6 +13,18 @@
                 </DialogDescription>
             </DialogHeader>
             <DialogFooter>
+                <DialogClose as-child>
+                    <div class="flex gap-4 flex-col  md:flex-row">
+                        <Button v-if="props.status == 'Not active'" variant="default"
+                            @click="updateStatus(props.customerName, 'Active')" type="submit">
+                            Mark as active
+                        </Button>
+                        <Button v-if="props.status == 'Active'" variant="default"
+                            @click="updateStatus(props.customerName, 'Not active')" type="submit">
+                            Mark as not active
+                        </Button>
+                    </div>
+                </DialogClose>
                 <AlertDialog>
                     <AlertDialogTrigger as-child>
                         <Button variant="destructive">
@@ -34,18 +46,6 @@
                         </AlertDialogFooter>
                     </AlertDialogContent>
                 </AlertDialog>
-                <DialogClose as-child>
-                    <div class="flex gap-4 flex-col  md:flex-row">
-                        <Button v-if="props.status == 'Not active'" variant="ghost"
-                            @click="updateStatus(props.customerName, 'Active')" type="submit">
-                            Mark as active
-                        </Button>
-                        <Button v-if="props.status == 'Active'" variant="ghost"
-                            @click="updateStatus(props.customerName, 'Not active')" type="submit">
-                            Mark as not active
-                        </Button>
-                    </div>
-                </DialogClose>
             </DialogFooter>
         </DialogContent>
     </Dialog>
