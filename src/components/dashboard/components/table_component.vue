@@ -150,9 +150,7 @@
                         {{ customer.status }}
                     </td>
                     <td class="px-6 py-4 text-left">
-                        <div class="flex gap-4">
-                            <updateStatusComponent :customerName="customer.customerName" />
-                        </div>
+                        <updateStatusComponent :customerName="customer.customerName" :status="customer.status"/>
                     </td>
                 </tr>
             </tbody>
@@ -175,10 +173,11 @@ import { onMounted } from 'vue';
 import { initFlowbite } from 'flowbite';
 import addPayableComponent from './add_payable_component.vue';
 import updateStatusComponent from './update_status_component.vue';
-import { useTableDashboardController } from '../../../controllers/dashboard/table_dashboard_controller';
+import { useTableDashboardController, fetchPayable } from '../../../controllers/dashboard/table_dashboard_controller';
 
-onMounted(() => {
+onMounted(async() => {
     initFlowbite()
+    await fetchPayable()
 });
 
 const {

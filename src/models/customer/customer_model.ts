@@ -1,7 +1,7 @@
 export type Customer = {
     customerName: string;
     address: string;
-    createdDate: string;
+    createdDate: Date;
     status: string;
-    [key: string]: string;
+    [key: string]: string | Date;
 };

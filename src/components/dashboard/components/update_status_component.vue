@@ -14,12 +14,16 @@
             </DialogHeader>
             <DialogFooter>
                 <div class="flex gap-4 flex-col md:flex-row">
-                    <Button variant="default" @click="updateStatus('Paid')" type="submit">
-                        Mark as paid
-                    </Button>
-                    <Button variant="destructive" @click="updateStatus('Unpaid')" type="submit">
-                        Mark as unpaid
-                    </Button>
+                    <DialogClose as-child v-if="props.status == 'Unpaid'">
+                        <Button variant="default" @click="updateStatus(props.customerName,'Paid')" type="submit">
+                            Mark as paid
+                        </Button>
+                    </DialogClose>
+                    <DialogClose as-child v-if="props.status == 'Paid'" > 
+                        <Button variant="destructive" @click="updateStatus(props.customerName,'Unpaid')" type="submit">
+                            Mark as unpaid
+                        </Button>
+                    </DialogClose>
                 </div>
 
             </DialogFooter>
@@ -40,19 +44,20 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
+    DialogClose,
 } from '@/components/ui/dialog'
+import { updateStatus } from '@/controllers/dashboard/update_payable_status_controller'
 
 //Props
 const props = defineProps({
     customerName: {
         type: String,
         default: '' // Provide a default value
+    },
+    status: {
+        type: String,
+        default: '' // Provide a default value
     }
 })
-const updateStatus = (status: string) => {
-    if (props.customerName) { // Check if customerName is defined
-        console.log(props.customerName, 'is', status);
-    }
-};
 
 </script>

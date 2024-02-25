@@ -22,10 +22,7 @@ export function useUpdateStatusController() {
         try {
             await deleteCustomer(customerName);
             fetchCustomers();
-            toast({
-                title: 'Customer successfully deleted',
-            });
-            window.alert('');
+            window.alert('Customer successfully deleted');
         } catch (error) {
             window.alert(`Error in deleting customer:', ${error}`);
         }

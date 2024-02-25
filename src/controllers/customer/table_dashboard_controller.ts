@@ -60,7 +60,7 @@ export function useTableDashboardController() {
     const filteredCustomer = computed(() => {
         if (search.value && filterChoice.value !== 'status') {
             return customers.value.filter(customers =>
-                customers[filterChoice.value].toLowerCase().includes(search.value.toLowerCase())
+                String(customers[filterChoice.value]).toLowerCase().includes(search.value.toLowerCase())
             );
         } else if (filterChoice.value == 'status' && search.value.toLowerCase() === 'active') {
             return customers.value.filter(customers => customers.status === 'Active');

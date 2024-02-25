@@ -1,18 +1,28 @@
 import { ref, reactive, computed } from 'vue';
-import { Customer, SortOrders, customers } from '@/models/dashboard/table_model';
+import { CustomerPayable, SortOrders, customersPayable } from '@/models/dashboard/table_model';
+import { getPayable } from '@/data/repositories/firebase_services';
+
+
+export const fetchPayable = async () => {
+    try {
+        const payableData = await getPayable();
+        customersPayable.value = payableData as CustomerPayable[];
+    } catch (error) {
+        console.error('Error fetching customers:', error);
+    }
+};
 
 
 export function useTableDashboardController() {
     const search = ref('');
     let filterChoice = ref('customerName');
-    const sortKey = ref<keyof Customer | ''>('');
+    const sortKey = ref<keyof CustomerPayable | ''>('');
     const sortOrders = reactive<SortOrders>({
         customerName: 1,
         address: 1,
         dueDate: 1,
         status: 1
     });
-
 
     const updateSearch = (choice: string) => {
         search.value = choice;
@@ -38,10 +48,10 @@ export function useTableDashboardController() {
         }
     };
 
-    const sort = (key: keyof Customer) => {
+    const sort = (key: keyof CustomerPayable) => {
         sortKey.value = key;
         sortOrders[key] = sortOrders[key]! * -1;
-        customers.value.sort((a, b) => {
+        customersPayable.value.sort((a, b) => {
             const aKey = a[key];
             const bKey = b[key];
             return (aKey === bKey ? 0 : aKey > bKey ? 1 : -1) * sortOrders[key]!;
@@ -50,16 +60,16 @@ export function useTableDashboardController() {
 
     const filteredCustomer = computed(() => {
         if (search.value && filterChoice.value !== 'status') {
-            return customers.value.filter(customers =>
-                customers[filterChoice.value].toLowerCase().includes(search.value.toLowerCase())
+            return customersPayable.value.filter(customersPayable =>
+                String(customersPayable[filterChoice.value]).toLowerCase().includes(search.value.toLowerCase())
             );
         } else if (filterChoice.value == 'status' && search.value.toLowerCase() === 'paid') {
-            return customers.value.filter(customers => customers.status === 'Paid');
+            return customersPayable.value.filter(customersPayable => customersPayable.status === 'Paid');
         } else if (filterChoice.value == 'status' && search.value.toLowerCase() === 'unpaid') {
-            return customers.value.filter(customers => customers.status === 'Unpaid');
+            return customersPayable.value.filter(customersPayable => customersPayable.status === 'Unpaid');
         }
         else {
-            return customers.value;
+            return customersPayable.value;
         }
     });
 
@@ -68,7 +78,7 @@ export function useTableDashboardController() {
         filterChoice,
         sortKey,
         sortOrders,
-        customers,
+        customersPayable,
         updateSearch,
         handleClick,
         textConverter,

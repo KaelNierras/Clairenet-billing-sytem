@@ -1,4 +1,4 @@
-import { addUserData } from "@/data/repositories/firebase_services";
+import { addCustomerData } from "@/data/repositories/firebase_services";
 import { Customer } from "@/models/customer/customer_model";
 import { ref } from "vue";
 import { fetchCustomers } from "./table_dashboard_controller";
@@ -13,11 +13,11 @@ export function useAddCustomerController() {
         const customer = {
             customerName: customerName.value,
             address: `${selectedBarangay.value}, ${selectedMunicipality.value}`,
-            createdDate: new Date().toDateString(),
+            createdDate: new Date(),
             status: 'Active',
         } as Customer;
         try {
-            await addUserData(customer);
+            await addCustomerData(customer);
             fetchCustomers();
             window.alert('User data added successfully');
         } catch (error) {
