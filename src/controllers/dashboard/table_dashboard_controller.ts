@@ -5,13 +5,21 @@ import { getPayable } from '@/data/repositories/firebase_services';
 
 export const fetchPayable = async () => {
     try {
-        const payableData = await getPayable();
+        let payableData = await getPayable();
+        payableData = payableData.map(payable => {
+            const dueDate = payable.dueDate.toDate(); // Convert Firestore Timestamp to JavaScript Date
+            payable.dueDate = dueDate.toDateString(); // Convert Date to string
+            return payable;
+        });
+
+        // Sort payableData in ascending order based on dueDate
+        payableData.sort((a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime());
+
         customersPayable.value = payableData as CustomerPayable[];
     } catch (error) {
         console.error('Error fetching customers:', error);
     }
 };
-
 
 export function useTableDashboardController() {
     const search = ref('');
