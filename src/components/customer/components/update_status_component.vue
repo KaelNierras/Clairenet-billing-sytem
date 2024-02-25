@@ -28,15 +28,15 @@
                 <AlertDialog>
                     <AlertDialogTrigger as-child>
                         <Button variant="destructive">
-                            <Trash2/>
+                            <Trash2 />
                         </Button>
                     </AlertDialogTrigger>
                     <AlertDialogContent>
                         <AlertDialogHeader>
                             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                             <AlertDialogDescription>
-                                This action cannot be undone. This will permanently delete your
-                                account and remove your data from our servers.
+                                This action cannot be undone. This will permanently delete the customer and remove the customer data
+                                from our servers.
                             </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
