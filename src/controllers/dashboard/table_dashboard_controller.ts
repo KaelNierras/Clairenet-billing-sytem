@@ -1,21 +1,14 @@
 import { ref, reactive, computed } from 'vue';
-import { CustomerPayable, SortOrders, customersPayable } from '@/models/dashboard/table_model';
+import { CustomerPayable, SortOrders } from '@/models/dashboard/table_model';
 import { getPayable } from '@/data/repositories/firebase_services';
 
+export const customersPayable = ref<CustomerPayable[]>([]);
 
 export const fetchPayable = async () => {
     try {
-        let payableData = await getPayable();
-        payableData = payableData.map(payable => {
-            const dueDate = payable.dueDate.toDate(); // Convert Firestore Timestamp to JavaScript Date
-            payable.dueDate = dueDate.toDateString(); // Convert Date to string
-            return payable;
-        });
-
-        // Sort payableData in ascending order based on dueDate
-        payableData.sort((a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime());
-
-        customersPayable.value = payableData as CustomerPayable[];
+        const payableData = await getPayable();
+        const sortedPayableData = payableData.sort((a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime());
+        customersPayable.value = sortedPayableData as CustomerPayable[];
     } catch (error) {
         console.error('Error fetching customers:', error);
     }
