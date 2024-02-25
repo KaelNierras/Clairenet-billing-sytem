@@ -14,6 +14,10 @@ export const fetchUpcomingDuePayables = async () => {
             customer.dueDate = dueDate.toDateString(); // Convert Date to string
             return customer;
         });
+
+        // Sort customerData in ascending order based on dueDate
+        customerData.sort((a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime());
+
         upComingDueList.value = customerData as Customer[];
     } catch (error) {
         console.error('Error fetching upcoming due payables:', error);
