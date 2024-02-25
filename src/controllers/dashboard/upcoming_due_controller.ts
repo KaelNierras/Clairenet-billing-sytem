@@ -3,8 +3,19 @@ import { Customer } from '../../models/dashboard/upcoming_due_model';
 import {getUpcomingDuePayables} from '@/data/repositories/firebase_services';
 import { computed, ref } from 'vue';
 
-
 export const upComingDueList = ref<Customer[]>([]);
+
+export const seeAll = () => {
+    limit.value = upComingDueList.value.length; // Show all items
+};
+
+export const seeLess = () => {
+    limit.value = 3; // Decrease limit by 3, but not less than 3
+};
+
+export const limit = ref(3);
+
+export const limitedUpComingDueList = computed(() => upComingDueList.value.slice(0, limit.value));
 
 export const fetchUpcomingDuePayables = async () => {
     try {
@@ -23,15 +34,3 @@ export const fetchUpcomingDuePayables = async () => {
         console.error('Error fetching upcoming due payables:', error);
     }
 };
-
-export const seeAll = () => {
-    limit.value = upComingDueList.value.length; // Show all items
-};
-
-export const seeLess = () => {
-    limit.value = 3; // Decrease limit by 3, but not less than 3
-};
-
-export const limit = ref(3);
-
-export const limitedUpComingDueList = computed(() => upComingDueList.value.slice(0, limit.value));
