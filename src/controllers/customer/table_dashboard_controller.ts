@@ -56,6 +56,7 @@ export function useTableDashboardController() {
             return (aKey === bKey ? 0 : aKey > bKey ? 1 : -1) * sortOrders[key]!;
         });
     };
+    
 
     const filteredCustomer = computed(() => {
         if (search.value && filterChoice.value !== 'status') {

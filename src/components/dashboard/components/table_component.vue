@@ -108,10 +108,10 @@
                     <th scope="col" class="px-6 py-3 ">
                         <div class="flex flex-row items-center gap-3">
                             Bill
-                            <span class="material-symbols-outlined hover:cursor-pointer text-xl hover:text-muted-foreground"
+                            <!-- <span class="material-symbols-outlined hover:cursor-pointer text-xl hover:text-muted-foreground"
                                 @click="sort('bill')">
                                 swap_vert
-                            </span>
+                            </span> -->
                         </div>
                     </th>
                     <th scope="col" class="px-6 py-3">
